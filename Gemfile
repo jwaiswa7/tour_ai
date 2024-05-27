@@ -74,4 +74,4 @@ group :test do
 
 end
 
-gem 'chatgpt-ruby'
+gem 'ruby-openai'
