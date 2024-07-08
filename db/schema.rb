@@ -10,8 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 0) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_08_091745) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "assistants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "remote_id"
+    t.string "model"
+    t.text "instructions"
+    t.decimal "temperature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.string "shopify_domain", null: false
+    t.string "shopify_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "access_scopes", default: "", null: false
+    t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
+  end
 
 end
