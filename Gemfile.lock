@@ -90,7 +90,7 @@ GEM
       reline (>= 0.3.8)
     erubi (1.12.0)
     event_stream_parser (1.0.0)
-    faraday (2.9.0)
+    faraday (2.9.2)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
@@ -186,7 +186,7 @@ GEM
     reline (0.5.4)
       io-console (~> 0.5)
     rexml (3.2.6)
-    ruby-openai (7.0.1)
+    ruby-openai (7.1.0)
       event_stream_parser (>= 0.3.0, < 2.0.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
@@ -243,7 +243,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.1)
   redis (~> 4.0)
-  ruby-openai
+  ruby-openai (~> 7.1.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
