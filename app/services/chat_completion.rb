@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ChatCompletion < ApplicationService
   def initialize
     @client = OpenAI::Client.new

@@ -1,0 +1,2 @@
+class VectorStore < ApplicationRecord
+end

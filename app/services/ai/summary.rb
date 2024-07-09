@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ai
   class Summary < ApplicationService
     def initialize(text:)
@@ -10,24 +12,25 @@ module Ai
     end
 
     private
+
     attr_accessor :text, :client
 
     def call_openai
       response = client.chat(
         parameters: {
-        model: "gpt-4o", # Required.
-        messages: [message], # Required.
-        temperature: 0.7,
+          model: 'gpt-4o', # Required.
+          messages: [message], # Required.
+          temperature: 0.7
         }
       )
-  
+
       response = JSON.parse(response.to_json, object_class: OpenStruct)
-  
+
       response.choices[0].message.content
     end
 
     def message
-      { role: "user", content: build_prompt }
+      { role: 'user', content: build_prompt }
     end
 
     def build_prompt
