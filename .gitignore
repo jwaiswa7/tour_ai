@@ -36,3 +36,6 @@
 
 # ignore node
 node_modules
+
+# byebug history
+.byebug_history
