@@ -2,10 +2,14 @@ class ItinerariesController < ApplicationController
   def create
     # render turbo 
     @itinerary = Itinerary.new(itinerary_params)
-    if @itinerary.save
-      redirect_to root_path
-    else
-      render turbo_stream: turbo_stream.replace(@itinerary, partial: "itineraries/form", locals: { itinerary: @itinerary })
+    respond_to do |format|
+      format.turbo_stream do
+        if @itinerary.save
+          render turbo_stream: turbo_stream.replace("itinerary", partial: "itineraries/itinerary", locals: { itinerary: @itinerary })
+        else
+          render turbo_stream: turbo_stream.replace(@itinerary, partial: "itineraries/form", locals: { itinerary: @itinerary })
+        end
+      end
     end
   end
 

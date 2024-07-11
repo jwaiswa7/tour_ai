@@ -26,7 +26,20 @@
       <option value="FR">France</option>
       <option value="DE">Germany</option>
     </select>
+    <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white mt-5">Choose Activities</h3>
+    <ul class="grid w-full gap-6 md:grid-cols-3" >
+      <% Itinerary::ACTIVITIES.each_with_index do |activity, index| %>
+      <li>
+        <%= form.check_box :activities, { multiple: true, class: 'hidden peer', id: "itinerary_activity_#{index}" }, activity, nil %>
+        <%= form.label "activity_#{index}", class: 'inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700'  do %>
+        <div class="block">
+          <%= activity %>
+        </div>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
     <%= form.text_area :notes, class: "block p-2.5 mt-5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Write your thoughts here..." %>
     <%= form.submit "Submit" , class: "mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 w-1/2" %>
   </form>
-<% end %>
+  <% end %>

@@ -1,10 +1,13 @@
 <div class="container">
   <div class="flex">
-    <div class="w-1/2"></div>
     <div class="w-1/2 p-4">
-    <%= turbo_frame_tag "new_itinerary_form" do %>
-      <%= render partial: 'itineraries/form', locals: { post: @itenerary } %>
-    <% end %>
+      <%= turbo_frame_tag "new_itinerary_form" do %>
+        <%= render partial: 'itineraries/form', locals: { post: @itenerary } %>
+      <% end %>
+    </div>
+    <div class="w-1/2 p-4">
+      <div id="itinerary">
+      </div>
     </div>
   </div>
 </div>
