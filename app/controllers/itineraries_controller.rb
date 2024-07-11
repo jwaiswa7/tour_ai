@@ -5,7 +5,8 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @itinerary.save
-          render turbo_stream: turbo_stream.replace("itinerary", partial: "itineraries/itinerary", locals: { itinerary: @itinerary })
+          response = RequestAi.new.call
+          render turbo_stream: turbo_stream.replace("itinerary", partial: "itineraries/itinerary", locals: { response: response })
         else
           render turbo_stream: turbo_stream.replace(@itinerary, partial: "itineraries/form", locals: { itinerary: @itinerary })
         end

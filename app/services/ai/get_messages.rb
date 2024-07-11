@@ -28,7 +28,7 @@ module Ai
         case status
         when 'queued', 'in_progress', 'cancelling'
           puts 'Sleeping'
-          sleep 1 # Wait one second and poll again
+          sleep 3 # Wait one second and poll again
         when 'completed'
           @run_successfull = true
           break # Exit loop and report result to user
