@@ -12,8 +12,14 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <header class="bg-gray-200 text-white p-4">
+      <h1 class="text-2xl">My App</h1>
+    </header>
+    <main class="container mx-auto px-5 flex">
       <%= yield %>
     </main>
+    <footer class="bg-gray-200 text-white p-4">
+      <p>&copy; 2020 My App</p>
+    </footer>
   </body>
 </html>
