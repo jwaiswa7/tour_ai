@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Ai
   class GetMessages < Base
 
@@ -24,11 +25,11 @@ module Ai
       while true do
         response = client.runs.retrieve(id: run_id, thread_id: thread_id)
         status = response['status']
-    
+
         case status
         when 'queued', 'in_progress', 'cancelling'
           puts 'Sleeping'
-          sleep 1 # Wait one second and poll again
+          sleep 3 # Wait one second and poll again
         when 'completed'
           @run_successfull = true
           break # Exit loop and report result to user

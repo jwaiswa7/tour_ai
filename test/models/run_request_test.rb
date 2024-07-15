@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "test_helper"
 
-class ItineraryTest < ActiveSupport::TestCase
+class RunRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

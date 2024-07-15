@@ -1,7 +1,9 @@
+# frozen_string_literal: true
 module Ai
   class SendMessage < Base
 
-    def initialize
+    def initialize(message:)
+      @message = message
       @assistant = Assistant.last
     end
 
@@ -30,7 +32,7 @@ module Ai
         thread_id: thread_id,
         parameters: {
             role: "user",
-            content: "List for me 5 tour destinations in Entebbe Uganda.  Return some information of about 30 words on Lake Victoria Hotel and price for a room",
+            content: message,
         })
     end
 
