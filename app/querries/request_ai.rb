@@ -1,25 +1,23 @@
+# frozen_string_literal: true
 class RequestAi
-  # def initialize(itinerary_id: nil)
-  #   begin
-  #     @itinerary = Itinerary.find(itinerary_id) 
-  #   rescue ActiveRecord::RecordNotFound
-  #     @itinerary = nil
-  #   end
-  # end
-
-  def initialize
-    puts 'Request Ai'
+  def initialize(itinerary_id: nil)
+    begin
+      @itinerary = Itinerary.find(itinerary_id)
+    rescue ActiveRecord::RecordNotFound
+      @itinerary = nil
+    end
   end
 
   def call
-    # return if itinerary.nil?
+    return if itinerary.nil?
     save_run_request
+    sleep(10)
     return_message
   end
 
   private
 
-  attr_accessor :thread
+  attr_accessor :thread, :itinerary
 
   def return_message
     get_message['data'].first['content'].first['text']['value']
@@ -33,7 +31,7 @@ class RequestAi
   end
 
   def create_run
-    @create_run ||= Ai::SendMessage.call(message: message)
+    @create_run ||= Ai::SendMessage.call(message: itinerary.prompt)
   end
 
   def save_run_request
@@ -41,10 +39,5 @@ class RequestAi
       thread_id: create_run[:thread_id],
       run_id: create_run[:run_id]
     )
-    puts create_run
-  end
-
-  def message
-    "List for me 5 tour destinations in Entebbe Uganda.  Return some information of about 30 words on Lake Victoria Hotel and price for a room"
   end
 end

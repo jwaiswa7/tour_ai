@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Ai
   class Files < Base
     def call

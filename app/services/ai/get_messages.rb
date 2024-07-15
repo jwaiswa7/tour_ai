@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Ai
   class GetMessages < Base
 
@@ -24,7 +25,7 @@ module Ai
       while true do
         response = client.runs.retrieve(id: run_id, thread_id: thread_id)
         status = response['status']
-    
+
         case status
         when 'queued', 'in_progress', 'cancelling'
           puts 'Sleeping'

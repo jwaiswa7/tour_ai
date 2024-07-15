@@ -1,16 +1,26 @@
+# frozen_string_literal: true
 class Itinerary < ApplicationRecord
   ACTIVITIES = [
-    "City walking tour",
-    "Food and wine tasting tour",
-    "Adventure sports",
-    "Wildlife safari",
-    "Boat cruise",
-    "Cultural dance show",
-    "Cooking class",
-    "Historical site visit",
-    "Beach day",
-    "Mountain hiking"
+    "Bird Watching",
+    "Wildlife Enthusiast",
+    "Gardening and Botany",
+    "Boating and Fishing",
+    "Hiking and Nature Walks",
+    "Historical Interests",
+    "Photography",
+    "Golf",
+    "Fishing",
+    "Cycling",
+    "Water Sports",
+    "Relaxation and Wellness",
+    "Volunteering"
   ].freeze
 
-  attr_accessor :activities
+  acts_as_taggable_on :interests
+
+  scope :recent, -> { order(created_at: :desc) }
+
+  def prompt
+    "Create an itinerary for someone with the hobbies ' #{interest_list.join(', ')} ' in Entebbe from #{start_date} to #{end_date}"
+  end
 end
