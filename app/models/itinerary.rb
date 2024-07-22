@@ -20,6 +20,8 @@ class Itinerary < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
+  has_one :run_request, dependent: :destroy
+
   def prompt
     "Create an itinerary for someone with the hobbies ' #{interest_list.join(', ')} ' in Entebbe from #{start_date} to #{end_date}"
   end
