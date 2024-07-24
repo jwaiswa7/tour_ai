@@ -39,11 +39,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_15_100241) do
   end
 
   create_table "run_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "itinerary_id", null: false
     t.string "thread_id"
     t.string "run_id"
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["itinerary_id"], name: "index_run_requests_on_itinerary_id"
   end
 
   create_table "shops", force: :cascade do |t|
@@ -95,5 +97,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_15_100241) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "run_requests", "itineraries"
   add_foreign_key "taggings", "tags"
 end
