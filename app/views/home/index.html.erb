@@ -1,13 +1,10 @@
-<div class="container">
-  <div class="flex">
-    <div class="w-1/2 p-4">
-      <%= turbo_frame_tag "new_itinerary_form" do %>
-        <%= render partial: 'itineraries/form', locals: { post: @itenerary } %>
-      <% end %>
-    </div>
-    <div class="w-1/2 p-4">
-      <div id="itinerary">
-      </div>
-    </div>
+<%= render "shared/title" %>
+<%= render "shared/main_features" %>
+<section class="py-20">
+  <div class="container mx-auto px-16 items-center flex flex-col lg:flex-row">
+    <%= turbo_frame_tag "new_itinerary_form" do %>
+      <%= render partial: 'itineraries/form', locals: { post: @itenerary } %>
+    <% end %>
   </div>
-</div>
+</section>
+<%= render "shared/grow_business" %>

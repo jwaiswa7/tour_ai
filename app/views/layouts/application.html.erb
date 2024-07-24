@@ -6,20 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <header class="bg-gray-200 text-white p-4">
-      <h1 class="text-2xl">My App</h1>
-    </header>
-    <main class="container mx-auto px-5 flex">
-      <%= yield %>
-    </main>
-    <footer class="bg-gray-200 text-white p-4">
-      <p>&copy; 2020 My App</p>
-    </footer>
+    <div>
+      <main class="text-gray-900">
+        <%= yield %>
+      </main>
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>
