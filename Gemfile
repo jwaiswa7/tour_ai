@@ -78,3 +78,4 @@ end
 
 gem 'ruby-openai', '~> 7.1.0'
 gem 'acts-as-taggable-on', '~> 9.0'
+gem 'sidekiq'
