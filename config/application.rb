@@ -22,6 +22,8 @@ module TourAi
 
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
+    config.active_job.queue_adapter = :sidekiq
+
     config.generators do |generate|
       generate.orm :active_record, primary_key_type: :uuid
     end

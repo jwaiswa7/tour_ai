@@ -8,7 +8,6 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @itinerary.save
-          RequestAi.new(itinerary_id: @itinerary.id).call
           render turbo_stream: turbo_stream.replace(
             'new_itinerary_form', partial: "itineraries/itinerary",
             locals: { itinerary: @itinerary }
@@ -24,26 +23,31 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @messages = Ai::GetMessages.call(
-      thread_id: @run_request.thread_id,
-      run_id: @run_request.run_id
-    )['data']
-    
     respond_to do |format|
       format.json do
-        render :show, status: :unprocessable_entity
+        if @run_request.present?
+          run = Ai::GetMessages.new(thread_id: @run_request.thread_id, run_id: @run_request.run_id).call
+          if run
+            @messages = run['data']
+            render :show, status: :ok
+          else
+            render :show, status: :unprocessable_entity
+          end
+        else
+          render :show, status: :unprocessable_entity
+        end
       end
     end
   end
 
   private
 
-  def set_itinerary
-    @itinerary = Itinerary.find(params[:id])
-  end
-
   def set_run_request
     @run_request = @itinerary.run_request
+  end
+
+  def set_itinerary
+    @itinerary = Itinerary.find(params[:id])
   end
 
   def itinerary_params
