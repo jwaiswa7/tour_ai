@@ -17,7 +17,7 @@ module Ai
 
     def messages
       run_status
-      puts "run status: #{run_successfull}"
+      return false unless run_successfull
       client.messages.list(thread_id: thread_id, parameters: { order: 'desc' }) if run_successfull
     end
 

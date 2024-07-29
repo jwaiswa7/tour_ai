@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: %i[show edit update destroy]
+  before_action :set_run_request, only: %i[show]
 
   def create
     @itinerary = Itinerary.new(itinerary_params)
@@ -22,15 +23,28 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-    @messages = [{ "id": 1, "content": "Hello" }]
     respond_to do |format|
       format.json do
-        render :show, status: :ok
+        if @run_request.present?
+          run = Ai::GetMessages.new(thread_id: @run_request.thread_id, run_id: @run_request.run_id).call
+          if run
+            @messages = run['data']
+            render :show, status: :ok
+          else
+            render :show, status: :unprocessable_entity
+          end
+        else
+          render :show, status: :unprocessable_entity
+        end
       end
     end
   end
 
   private
+
+  def set_run_request
+    @run_request = @itinerary.run_request
+  end
 
   def set_itinerary
     @itinerary = Itinerary.find(params[:id])

@@ -8,13 +8,18 @@ export default class extends Controller {
     setTimeout(() => {
       this.loadItinerary()
     }, 10000)
-
-    this.loadItinerary()
   }
 
   async loadItinerary() {
     const id = this.data.get('id')
     let response = await fetch(`/itineraries/${id}.json`)
+    const status = response.status
+    if (status !== 200) {
+      setTimeout(() => {
+        this.loadItinerary()
+      }, 10000)
+      return
+    }
     const data = await response.json()
     this.loaderTarget.classList.add('hidden')
     this.buildMessage(data)
