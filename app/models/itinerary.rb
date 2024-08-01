@@ -38,6 +38,6 @@ class Itinerary < ApplicationRecord
   after_create_commit { RequestAiJob.perform_async(id) }
 
   def prompt
-    "Create an itinerary for someone with the hobbies ' #{interest_list.join(', ')} ' in Entebbe from #{start_date} to #{end_date}"
+    "Create an itinerary for someone with the hobbies '#{interest_list.join(', ')}', they are interested in the destinations '#{destination_list.join(', ')}'  from #{start_date} to #{end_date}"
   end
 end

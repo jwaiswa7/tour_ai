@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_15_100241) do
     t.string "engagement_level"
     t.string "weather"
     t.text "notes"
+    t.jsonb "ai_response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,15 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_15_100241) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["itinerary_id"], name: "index_run_requests_on_itinerary_id"
-  end
-
-  create_table "shops", force: :cascade do |t|
-    t.string "shopify_domain", null: false
-    t.string "shopify_token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "access_scopes", default: "", null: false
-    t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 
   create_table "taggings", force: :cascade do |t|

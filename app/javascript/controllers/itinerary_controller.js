@@ -12,7 +12,7 @@ export default class extends Controller {
 
   async loadItinerary() {
     const id = this.data.get('id')
-    let response = await fetch(`/itineraries/${id}.json`)
+    let response = await fetch(`/itineraries/${id}/run.json`)
     const status = response.status
     if (status !== 200) {
       setTimeout(() => {
@@ -27,10 +27,6 @@ export default class extends Controller {
 
   buildMessage(data) {
     const message = data.itinerary.messages[0].content[0].text.value
-    this.messageTarget.innerHTML = `
-      <div class="message">
-        <p>${message}</p>
-      </div>
-    `
+    this.messageTarget.innerHTML = `View your itinerary: <a href="${data.itinerary.url}" target="_blank">${message}</a>`
   }
 }

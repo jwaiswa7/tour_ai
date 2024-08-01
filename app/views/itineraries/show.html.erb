@@ -1,0 +1,63 @@
+<section id="itinerary-activities" class="lg:pb-10 lg:pt-10">
+  <div class="container mx-auto">
+    <h2 class="text-3xl lg:text-5xl font-semibold">Your Itinerary</h2>
+    <div class="grid w-full gap-6 md:grid-cols-3 flex flex-wrap">
+      <% @itinerary.ai_response['itinerary'].each do |itinerary| %>
+        <div class="flex-1 px-3">
+          <div class="p-12 rounded-lg border border-solid border-gray-200 mb-8"
+            style="box-shadow:0 10px 28px rgba(0,0,0,.08)">
+            <p class="font-semibold text-xl"><%= itinerary['date'] %></p>
+            </p>
+            <ul>
+              <% itinerary['activities'].each do |activity| %>
+                <li class="pt-5">
+                  <% activity.each do |key, value| %>
+                    <strong><%= key.humanize %>:</strong> <%= value %><br/>
+                  <% end %>
+                </li>
+              <% end %>
+            </li>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<section id="itinerary-details" class="container mx-auto bg-gray-200 rounded-lg text-center">
+  <div class="container-mx-auto">
+  <div class="grid w-full gap-6 md:grid-cols-3 flex flex-wrap">
+    <div class="p-5 rounded-lg border border-solid border-gray-100 m-8">
+      <div class="flex-1 px-3">
+        <p class="font-semibold text-xl">Hotel</p>
+        <% @itinerary.ai_response['hotel'].each do |key, value| %>
+          <strong><%= key.humanize %>: </strong><br/>
+          <%= value %>
+        <% end %>
+      </div>
+    </div>
+    <div class="p-5 rounded-lg border border-solid border-gray-100 mt-8 mb-8 mr-8">
+      <div class="flex-1 px-3">
+        <p class="font-semibold text-xl">Restaurans</p>
+        <ul>
+          <% @itinerary.ai_response['restaurants'].each do |restaurant| %>
+            <li class="pt-5">
+              <% restaurant.each do |key, value| %>
+                <strong><%= key.humanize %>:</strong> <%= value %><br/>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="p-5 rounded-lg border border-solid border-gray-100 m-8">
+      <div class="flex-1 px-3">
+        <p class="font-semibold text-xl">Total</p>
+        <strong><%= @itinerary.ai_response['total_spent'] %></strong>
+      </div>
+    </div>
+  </div>
+
+
+    
+  </div>
+</section>
