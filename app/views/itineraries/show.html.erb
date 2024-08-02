@@ -1,63 +1,88 @@
-<section id="itinerary-activities" class="lg:pb-10 lg:pt-10">
+<section id="itinerary-activities" class="lg:pb-10 lg:pt-10" >
   <div class="container mx-auto">
     <h2 class="text-3xl lg:text-5xl font-semibold">Your Itinerary</h2>
-    <div class="grid w-full gap-6 md:grid-cols-3 flex flex-wrap">
-      <% @itinerary.ai_response['itinerary'].each do |itinerary| %>
-        <div class="flex-1 px-3">
-          <div class="p-12 rounded-lg border border-solid border-gray-200 mb-8"
-            style="box-shadow:0 10px 28px rgba(0,0,0,.08)">
-            <p class="font-semibold text-xl"><%= itinerary['date'] %></p>
-            </p>
-            <ul>
-              <% itinerary['activities'].each do |activity| %>
-                <li class="pt-5">
-                  <% activity.each do |key, value| %>
-                    <strong><%= key.humanize %>:</strong> <%= value %><br/>
-                  <% end %>
-                </li>
-              <% end %>
-            </li>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</section>
-<section id="itinerary-details" class="container mx-auto bg-gray-200 rounded-lg text-center">
-  <div class="container-mx-auto">
-  <div class="grid w-full gap-6 md:grid-cols-3 flex flex-wrap">
-    <div class="p-5 rounded-lg border border-solid border-gray-100 m-8">
-      <div class="flex-1 px-3">
-        <p class="font-semibold text-xl">Hotel</p>
-        <% @itinerary.ai_response['hotel'].each do |key, value| %>
-          <strong><%= key.humanize %>: </strong><br/>
-          <%= value %>
+    <table class="table-auto w-full">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Date</th>
+          <th class="px-4 py-2">Activities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @itinerary.ai_response['itinerary'].each_with_index do |itinerary, index| %>
+          <tr>
+            <td class="border px-4 py-2"><%= itinerary['date'] %> <span class="text-sm text-gray-500"><%= (@itinerary.start_date + index.days).strftime("%A-%d-%B") %><span></td>
+            <td class="border px-4 py-2">
+              <table>
+                <% itinerary['activities'].each do |activity| %>
+                  <tr>
+                    <% activity.each do |key, value| %>
+                      <td class="px-4 py-2"><strong><%= key.humanize %>:</strong> <%= value %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </table>
+            </td>
+          </tr>
         <% end %>
-      </div>
-    </div>
-    <div class="p-5 rounded-lg border border-solid border-gray-100 mt-8 mb-8 mr-8">
-      <div class="flex-1 px-3">
-        <p class="font-semibold text-xl">Restaurans</p>
-        <ul>
-          <% @itinerary.ai_response['restaurants'].each do |restaurant| %>
-            <li class="pt-5">
-              <% restaurant.each do |key, value| %>
-                <strong><%= key.humanize %>:</strong> <%= value %><br/>
+      </tbody>
+    </table>
+    <% @itinerary.ai_response.each do |key, value| %>
+      <%= next if key == 'itinerary' %>
+      <% if value.is_a?(Hash) %>
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2" colspan="2"><%= key.humanize %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% value.each do |k, v| %>
+              <tr>
+                <td class="border px-4 py-2"><strong><%= k.humanize %>:</strong></td>
+                <td class="border px-4 py-2"><%= v %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <% if value.is_a?(Array) %>
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2" colspan="2"><%= key.humanize %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% value.first.keys.each do |k| %>
+                <td class="border px-4 py-2"><strong><%= k.humanize %></strong></td>
               <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <div class="p-5 rounded-lg border border-solid border-gray-100 m-8">
-      <div class="flex-1 px-3">
-        <p class="font-semibold text-xl">Total</p>
-        <strong><%= @itinerary.ai_response['total_spent'] %></strong>
-      </div>
-    </div>
-  </div>
-
-
-    
+            </tr>
+            <% value.each do |v| %>
+              <tr>
+              <% v.values.each do |value| %>
+                <td class="border px-4 py-2"><%= value %></td>
+              <% end %>
+              <tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <% if value.is_a?(String) %>
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2" colspan="2"><%= key.humanize %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2"><%= value %></td>
+            </tr>
+          </tbody>
+        </table>
+        <% end %>
+    <% end %>
   </div>
 </section>
