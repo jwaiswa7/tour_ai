@@ -8,7 +8,7 @@ module Ai
     end
 
     def call
-      message
+      build_message
       {
         thread_id: thread_id,
         run_id: run_id
@@ -17,7 +17,7 @@ module Ai
 
     private
 
-    attr_accessor :assistant, :vector_store
+    attr_accessor :assistant, :message
 
     def thread
       @thread ||= client.threads.create
@@ -27,13 +27,14 @@ module Ai
       @thread_id ||= thread['id']
     end
 
-    def message
-      @message ||= client.messages.create(
+    def build_message
+      @build_message ||= client.messages.create(
         thread_id: thread_id,
         parameters: {
             role: "user",
             content: message,
-        })
+        }
+      )
     end
 
     def run_id

@@ -28,7 +28,7 @@ class ItinerariesController < ApplicationController
   def run
     respond_to do |format|
       format.json do
-        run = Ai::GetMessages.new(itinerary_id: @itinerary.id).call
+        run = ::Ai::GetMessages.call(itinerary_id: @itinerary.id)
         if run
           render :run, status: :ok
         else

@@ -33,7 +33,7 @@ class Itinerary < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
-  has_one :run_request, dependent: :destroy
+  has_many :run_requests, dependent: :destroy
 
   after_create_commit { RequestAiJob.perform_async(id) }
 

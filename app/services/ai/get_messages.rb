@@ -4,12 +4,13 @@ module Ai
 
     def initialize(itinerary_id: )
       @itinerary = ::Itinerary.find(itinerary_id)
-      run_request = @itinerary.run_request
-      @thread_id = run_request.thread_id
-      @run_id = run_request.run_id
+      run_request = @itinerary.run_requests.recent.first
+      @thread_id = run_request&.thread_id
+      @run_id = run_request&.run_id
     end
 
     def call
+      return if run_id.nil? || thread_id.nil?
       run_status
       return false unless run_successfull
       update_itiernary
