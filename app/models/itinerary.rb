@@ -33,11 +33,11 @@ class Itinerary < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
-  has_one :run_request, dependent: :destroy
+  has_many :run_requests, dependent: :destroy
 
   after_create_commit { RequestAiJob.perform_async(id) }
 
   def prompt
-    "Create an itinerary for someone with the hobbies ' #{interest_list.join(', ')} ' in Entebbe from #{start_date} to #{end_date}"
+    "Create an itinerary for someone with the hobbies '#{interest_list.join(', ')}', they are interested in the destinations '#{destination_list.join(', ')}'  from #{start_date} to #{end_date}"
   end
 end

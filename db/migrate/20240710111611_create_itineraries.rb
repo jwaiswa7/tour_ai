@@ -8,6 +8,7 @@ class CreateItineraries < ActiveRecord::Migration[7.0]
       t.string :engagement_level
       t.string :weather
       t.text :notes
+      t.jsonb :ai_response
 
       t.timestamps
     end

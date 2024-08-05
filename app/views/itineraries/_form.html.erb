@@ -1,6 +1,6 @@
 <div data-controller="form-navigation">
   <%= form_with(model: @itinerary, local: true) do |form| %>
-  <div data-form-navigation-target="step" class="hidden items-center">
+  <div data-form-navigation-target="step" class="hidden m-auto">
     <%= form.label :dates, 'Select Dates', class: 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 w-full' %>
     <div id="date-range-picker" date-rangepicker datepicker-format="dd-mm-yyyy" class="lex flex-wrap items-stretch grid w-1/2 gap-6 md:grid-cols-2">
       <div class="relative">
@@ -51,6 +51,10 @@
       </li>
       <% end %>
     </ul>
+  </div>
+  <div data-form-navigation-target="step" class="hidden w-1/2 m-auto">
+    <%= form.label :notest, 'Any other details', class: 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2' %>
+    <%= form.text_area :notes, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'Any other details' %>
   </div>
   <div class="mt-4">
     <button type="button" data-action="form-navigation#previous" class="btn py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white">Back</button>
