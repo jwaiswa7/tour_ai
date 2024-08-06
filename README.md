@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+#### SerpAPI
+Integrate with searAPI for real time scraping of data [link](https://serpapi.com/users/sign_in)
