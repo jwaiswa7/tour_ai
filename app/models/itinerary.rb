@@ -33,6 +33,10 @@ class Itinerary < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
+  scope :created_today, -> {
+    where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  }
+
   has_many :run_requests, dependent: :destroy
 
   after_create_commit { RequestAiJob.perform_async(id) }

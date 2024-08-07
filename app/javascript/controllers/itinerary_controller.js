@@ -28,5 +28,6 @@ export default class extends Controller {
   buildMessage(data) {
     const message = 'Click here to view your itinerary'
     this.messageTarget.innerHTML = `<a class="py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white" href="${data.itinerary.url}" target="_blank">${message}</a>`
+    this.messageTarget.classList.remove('hidden')
   }
 }
