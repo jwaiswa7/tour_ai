@@ -1,5 +1,6 @@
 [
     {
+      "key": "bwindi_impenetrable",
       "place": "Bwindi Impenetrable National Park",
       "district": "Kanungu",
       "image": "bwindi_impenetrable.jpg",
@@ -14,6 +15,7 @@
       ]
     },
     {
+      "key": "kibale_national_park",
       "place": "Murchison Falls National Park",
       "districts": ["Masindi", "Buliisa", "Nwoya", "Kiryandongo"],
       "image": "murchison_falls.jpg",
@@ -29,6 +31,7 @@
       ]
     },
     {
+      "key": "queen_elizabeth",
       "place": "Queen Elizabeth National Park",
       "districts": ["Kasese", "Rubirizi", "Rukungiri", "Kamwenge"],
       "image": "queen_elizabeth.jpg",
@@ -42,6 +45,7 @@
       ]
     },
     {
+      "key": "kidepo_valley",
       "place": "Kidepo Valley National Park",
       "districts": ["Kaabong", "Karenga"],
       "image": "murchison_falls.jpg",
@@ -56,6 +60,7 @@
       ]
     },
     {
+      "key": "lake_mburo",
       "place": "Lake Mburo National Park",
       "district": "Kiruhura",
       "image": "lake_mburo.jpg",
@@ -71,6 +76,7 @@
       ]
     },
     {
+      "key": "rwenzori_mountains",
       "place": "Rwenzori Mountains National Park",
       "districts": ["Kasese", "Bundibugyo", "Ntoroko"],
       "image": "kibale_national_park.jpg",
@@ -83,6 +89,7 @@
       ]
     },
     {
+      "key": "ziwa_rhino_sanctuary",
       "place": "Sipi Falls",
       "district": "Kapchorwa",
       "image": "sipi_falls.jpg",
@@ -97,6 +104,7 @@
       ]
     },
     {
+      "key": "mabira_forest",
       "place": "Jinja (Source of the Nile)",
       "district": "Jinja",
       "image": "source_of_the_nile.jpg",
