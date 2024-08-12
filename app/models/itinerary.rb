@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 class Itinerary < ApplicationRecord
+  PLACES_TO_VISIT = JSON.parse(File.read(Rails.root.join('lib', 'assets', 'places_to_visit.json')),
+symbolize_names: true).freeze
+
   ACTIVITIES = [
     "Bird Watching",
     "Wildlife Enthusiast",
@@ -29,17 +32,15 @@ class Itinerary < ApplicationRecord
   after_create_commit { RequestAiJob.perform_async(id) }
 
   def self.places_to_visit
-    file_path = Rails.root.join('lib', 'assets', 'places_to_visit.json')
-    if File.exist?(file_path)
-      file = File.read(file_path)
-      JSON.parse(file, symbolize_names: true).sample(6)
-    else
-      Rails.logger.error("File not found: #{file_path}")
-      []
-    end
+    PLACES_TO_VISIT.sample(6)
   rescue JSON::ParserError => e
     Rails.logger.error("JSON parsing error: #{e.message}")
     []
+  end
+
+  def activities_from_places_to_visit
+    PLACES_TO_VISIT.select{ |place|
+ destination_list.include?(place[:key]) }.map{ |place| place[:activities] }.flatten.uniq
   end
 
   def prompt

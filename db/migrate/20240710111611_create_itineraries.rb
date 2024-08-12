@@ -4,6 +4,7 @@ class CreateItineraries < ActiveRecord::Migration[7.0]
       t.date :start_date
       t.date :end_date
       t.string :budget
+      t.integer :number_of_people, default: 2
       t.string :accomodation_type
       t.string :engagement_level
       t.string :weather
