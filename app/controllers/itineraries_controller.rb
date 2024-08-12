@@ -4,10 +4,6 @@ class ItinerariesController < ApplicationController
 
   def new
     @itinerary = Itinerary.new
-    render turbo_stream: turbo_stream.replace(
-      'itinerary', partial: "itineraries/new",
-      locals: { itinerary: @itinerary }
-    )
   end
 
   def create
@@ -62,6 +58,7 @@ class ItinerariesController < ApplicationController
       :engagement_level,
       :weather,
       :notes,
+      :number_of_people,
       interest_list: [],
       destination_list: []
     )
