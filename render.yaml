@@ -1,12 +1,12 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: tembea_tenna
+    databaseName: tembea_tenna
+    user: tembea_tenna
     plan: free
 
 services:
   - type: web
-    name: mysite
+    name: tembea_tenna
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -15,7 +15,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: tembea_tenna
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false

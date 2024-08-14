@@ -1,65 +1,9 @@
 <div data-controller="form-navigation">
   <%= form_with(model: @itinerary, local: true) do |form| %>
-  <div data-form-navigation-target="step" class="hidden m-auto">
-    <%= form.label :dates, 'Select Dates', class: 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 w-full' %>
-    <div id="date-range-picker" date-rangepicker datepicker-format="dd-mm-yyyy" class="lex flex-wrap items-stretch grid w-1/2 gap-6 md:grid-cols-2">
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-          </svg>
-        </div>
-        <%= form.text_field :start_date, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Select start date" %>
-      </div>
-      <!-- <span class="mx-4 text-gray-500">to</span> -->
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
-          </svg>
-        </div>
-        <%= form.text_field :end_date, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Select end date" %>
-      </div>
-    </div>
-  </div>
-  <div data-form-navigation-target="step" class="hidden">
-    <%= form.label :cities, 'Select Destinations', class: 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2' %>
-    <div class="lex flex-wrap items-stretch grid w-full gap-6 md:grid-cols-6" >
-      <% Itinerary::DESTINATIONS.each_with_index do |destination, index| %>
-      <div class="block flex-1">
-        <%= form.check_box :destination_list, { multiple: true, class: 'hidden peer', id: "itinerary_destination_#{index}" }, destination, nil %>
-        <%= form.label "destination_#{index}", class: 'inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700'  do %>
-        <div class="block">
-          <%= destination %>
-        </div>
-        <% end %>
-      </div>
-      <% end %>
-    </div>
-  </div>
-  <div data-form-navigation-target="step" class="hidden">
-    <%= form.label :interest_list, 'Interests', class: 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2' %>
-    <ul class="grid w-full gap-6 md:grid-cols-6 flex flex-wrap" >
-      <% Itinerary::ACTIVITIES.each_with_index do |activity, index| %>
-      <li class="block flex-1">
-        <%= form.check_box :interest_list, { multiple: true, class: 'hidden peer', id: "itinerary_activity_#{index}" }, activity, nil %>
-        <%= form.label "activity_#{index}", class: 'inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700'  do %>
-        <div class="block">
-          <%= activity %>
-        </div>
-        <% end %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-  <div data-form-navigation-target="step" class="hidden w-1/2 m-auto">
-    <%= form.label :notest, 'Any other details', class: 'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2' %>
-    <%= form.text_area :notes, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500', placeholder: 'Any other details' %>
-  </div>
-  <div class="mt-4">
-    <button type="button" data-action="form-navigation#previous" class="btn py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white">Back</button>
-    <button type="button" data-action="form-navigation#next" data-form-navigation-target="nextButton" class="btn py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white">Next</button>
-    <%= form.submit "Submit", class: "btn hidden py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white", data: { action: "form-navigation#submit", "form-navigation-target": "submitButton" } %>
-  </div>
+  <%= render partial: "itineraries/form/destinations", locals: { form: form } %>
+  <%= render partial: "itineraries/form/interests", locals: { form: form } %>
+  <%= render partial: "itineraries/form/summary", locals: { form: form } %>
+  <%#= render partial: "itineraries/form/dates", locals: { form: form } %>
+  <%= render partial: "itineraries/form/navigation", locals: { form: form } %>
   <% end %>
 </div>

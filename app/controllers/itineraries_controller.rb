@@ -2,13 +2,17 @@
 class ItinerariesController < ApplicationController
   before_action :set_itinerary, only: %i[show edit run update destroy]
 
+  def new
+    @itinerary = Itinerary.new
+  end
+
   def create
     @itinerary = Itinerary.new(itinerary_params)
     respond_to do |format|
       format.turbo_stream do
         if @itinerary.save
           render turbo_stream: turbo_stream.replace(
-            'new_itinerary_form', partial: "itineraries/itinerary",
+            'ai-form', partial: "itineraries/itinerary",
             locals: { itinerary: @itinerary }
           )
         else
@@ -29,6 +33,7 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.json do
         run = ::Ai::GetMessages.call(itinerary_id: @itinerary.id)
+        run = false
         if run
           render :run, status: :ok
         else
@@ -53,6 +58,7 @@ class ItinerariesController < ApplicationController
       :engagement_level,
       :weather,
       :notes,
+      :number_of_people,
       interest_list: [],
       destination_list: []
     )
