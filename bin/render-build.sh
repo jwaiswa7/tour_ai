@@ -12,3 +12,6 @@ bundle exec rails assets:clean
 # Uncomment the following line:
 
 bundle exec rails db:migrate
+
+# If you're using a Hobby instance type, you need to create the admin user
+bundle exec rake admin:add_user

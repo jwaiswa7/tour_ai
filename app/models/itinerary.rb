@@ -40,7 +40,16 @@ symbolize_names: true).freeze
 
   def activities_from_places_to_visit
     PLACES_TO_VISIT.select{ |place|
- destination_list.include?(place[:key]) }.map{ |place| place[:activities] }.flatten.uniq
+      destination_list.include?(place[:key]) }.map{ |place| place[:activities] 
+    }.flatten.uniq
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["accomodation_type", "ai_response", "budget", "created_at", "end_date", "engagement_level", "id", "notes", "number_of_people", "start_date", "updated_at", "weather" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
   end
 
   def prompt
