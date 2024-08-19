@@ -17,10 +17,6 @@ class RequestAi
 
   attr_accessor :thread, :itinerary
 
-  def return_message
-    get_message['data'].first['content'].first['text']['value']
-  end
-
   def create_run
     @create_run ||= Ai::SendMessage.call(message: itinerary.prompt)
   end

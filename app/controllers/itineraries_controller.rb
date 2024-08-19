@@ -11,7 +11,7 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @itinerary.save
-          # RequestAi.new(itinerary_id: @itinerary.id).call
+          RequestAi.new(itinerary_id: @itinerary.id).call
           render turbo_stream: turbo_stream.replace(
             'ai-form', partial: "itineraries/itinerary",
             locals: { itinerary: @itinerary }

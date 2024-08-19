@@ -54,6 +54,6 @@ symbolize_names: true).freeze
   end
 
   def prompt
-    "Create an itinerary for someone with the hobbies '#{interest_list.join(', ')}', they are interested in the destinations '#{destination_list.join(', ')}'  from #{start_date} to #{end_date}"
+    Ai::Prompt.call(itinerary_id: id)
   end
 end
