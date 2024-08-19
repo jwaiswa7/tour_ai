@@ -1,88 +1,14 @@
+<%= render "shared/header" %>
 <section id="itinerary-activities" class="lg:pb-10 lg:pt-10" >
   <div class="container mx-auto">
     <h2 class="text-3xl lg:text-5xl font-semibold">Your Itinerary</h2>
-    <table class="table-auto w-full">
-      <thead>
-        <tr>
-          <th class="px-4 py-2">Date</th>
-          <th class="px-4 py-2">Activities</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @itinerary.ai_response['itinerary'].each_with_index do |itinerary, index| %>
-          <tr>
-            <td class="border px-4 py-2"><%= itinerary['date'] %> <span class="text-sm text-gray-500"><%= (@itinerary.start_date + index.days).strftime("%A-%d-%B") %><span></td>
-            <td class="border px-4 py-2">
-              <table>
-                <% itinerary['activities'].each do |activity| %>
-                  <tr>
-                    <% activity.each do |key, value| %>
-                      <td class="px-4 py-2"><strong><%= key.humanize %>:</strong> <%= value %></td>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </table>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% @itinerary.ai_response.each do |key, value| %>
-      <%= next if key == 'itinerary' %>
-      <% if value.is_a?(Hash) %>
-        <table class="table-auto w-full">
-          <thead>
-            <tr>
-              <th class="px-4 py-2" colspan="2"><%= key.humanize %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% value.each do |k, v| %>
-              <tr>
-                <td class="border px-4 py-2"><strong><%= k.humanize %>:</strong></td>
-                <td class="border px-4 py-2"><%= v %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-      <% if value.is_a?(Array) %>
-        <table class="table-auto w-full">
-          <thead>
-            <tr>
-              <th class="px-4 py-2" colspan="2"><%= key.humanize %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <% value.first.keys.each do |k| %>
-                <td class="border px-4 py-2"><strong><%= k.humanize %></strong></td>
-              <% end %>
-            </tr>
-            <% value.each do |v| %>
-              <tr>
-              <% v.values.each do |value| %>
-                <td class="border px-4 py-2"><%= value %></td>
-              <% end %>
-              <tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-      <% if value.is_a?(String) %>
-        <table class="table-auto w-full">
-          <thead>
-            <tr>
-              <th class="px-4 py-2" colspan="2"><%= key.humanize %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="border px-4 py-2"><%= value %></td>
-            </tr>
-          </tbody>
-        </table>
-        <% end %>
+    <% if @itinerary.ai_response.present? %>
+      <%= json_to_table(@itinerary.ai_response) %>
+    <% else %>
+      <p>Sorry, our servers are still generating your itinerary. Please try again in about 1 minute</p>
+      <div class="mt-12">
+        <%= link_to "Reload page", itinerary_path(@itinerary), class: "btn py-4 px-12 bg-teal-500 hover:bg-teal-600 rounded text-white" %>
+      </div>
     <% end %>
   </div>
 </section>

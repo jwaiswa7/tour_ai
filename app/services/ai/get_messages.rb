@@ -31,8 +31,7 @@ module Ai
     def client_response
       messages = client.messages.list(thread_id: thread_id, parameters: { order: 'desc' })
       message = messages['data'][0]['content'][0]['text']['value']
-      message_array = message.split("```")
-      json_message = message_array[1].sub(/^json/, '')
+      json_message = message.scan(/```json\s(.*?)\s```/m).flatten[0]
       JSON.parse(json_message)
     end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActiveAdmin.register RunRequest do
 
   # See permitted parameters documentation:
@@ -14,6 +15,6 @@ ActiveAdmin.register RunRequest do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
   actions :index, :show
 end

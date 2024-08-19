@@ -29,7 +29,7 @@ symbolize_names: true).freeze
 
   has_many :run_requests, dependent: :destroy
 
-  after_create_commit { RequestAiJob.perform_async(id) }
+  # after_create_commit { RequestAiJob.perform_async(id) }
 
   def self.places_to_visit
     PLACES_TO_VISIT.sample(6)
@@ -40,12 +40,13 @@ symbolize_names: true).freeze
 
   def activities_from_places_to_visit
     PLACES_TO_VISIT.select{ |place|
-      destination_list.include?(place[:key]) }.map{ |place| place[:activities] 
+      destination_list.include?(place[:key]) }.map{ |place| place[:activities]
     }.flatten.uniq
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["accomodation_type", "ai_response", "budget", "created_at", "end_date", "engagement_level", "id", "notes", "number_of_people", "start_date", "updated_at", "weather" ]
+    ["accomodation_type", "ai_response", "budget", "created_at", "end_date", "engagement_level", "id", "notes",
+"number_of_people", "start_date", "updated_at", "weather" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
@@ -53,6 +54,6 @@ symbolize_names: true).freeze
   end
 
   def prompt
-    "Create an itinerary for someone with the hobbies '#{interest_list.join(', ')}', they are interested in the destinations '#{destination_list.join(', ')}'  from #{start_date} to #{end_date}"
+    Ai::Prompt.call(itinerary_id: id)
   end
 end
