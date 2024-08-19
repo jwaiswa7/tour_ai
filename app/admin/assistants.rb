@@ -10,11 +10,23 @@ ActiveAdmin.register Assistant do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:name, :description, :remote_id, :model, :instructions, :temperature]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params do
+    permitted = [:name, :description, :remote_id, :model, :instructions, :temperature]
+    permitted << :other if params[:action] == 'create' && current_user.admin?
+    permitted
+  end
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :description
+      f.input :model
+      f.input :temperature
+      f.input :instructions
+      f.input :remote_id
+    end
+    f.actions
+  end
 
   actions :all
 
