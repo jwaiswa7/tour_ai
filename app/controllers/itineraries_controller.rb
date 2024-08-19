@@ -27,7 +27,7 @@ class ItinerariesController < ApplicationController
   end
 
   def show
-
+    ::Ai::GetMessages.call(itinerary_id: @itinerary.id)
   end
 
   def run

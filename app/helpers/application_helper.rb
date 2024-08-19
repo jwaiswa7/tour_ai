@@ -23,7 +23,7 @@ module ApplicationHelper
       if value.all? { |v| v.is_a?(String) }
         array_string(value) 
       else
-        array_json(value)
+        array_hash(value)
       end
     else
       value.to_s
@@ -34,7 +34,7 @@ module ApplicationHelper
     array.join(", ")
   end
 
-  def array_json(hash_array)
+  def array_hash(hash_array)
     content_tag(:ul, class: 'ul-table') do
       hash_array.map do |hash|
         concat(content_tag(:li, json_to_table(hash), class: 'li-table'))
