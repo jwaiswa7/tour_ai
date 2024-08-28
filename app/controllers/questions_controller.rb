@@ -6,7 +6,8 @@ class QuestionsController < ApplicationController
 
   def create
     ai_response = Ai::ChatBot::SendMessage.call(thread_id: question_params[:thread_id], message: question_params[:question])
-    @answer = ai_response["data"].map { |data| data["content"].map { |content| content["text"]["value"] } }.flatten
+    @question = question_params[:question]
+    @answer = ai_response["data"][0]["content"][0]["text"]["value"]
   end
 
   private
