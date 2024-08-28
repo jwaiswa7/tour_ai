@@ -39,7 +39,7 @@ module Ai
       end
 
       def retirieve_response
-        client.messages.list(thread_id: thread_id)
+        client.messages.list(thread_id: thread_id, parameters: { order: 'asc' })
       end
 
       def running

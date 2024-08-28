@@ -15,7 +15,7 @@
     <div class="lg:w-1/2">
       <div data-controller="chat">
         <%= render "questions/answer" %>
-        <%= render "questions/form" %>
+        <%= render partial: "questions/form", locals:  {thread_id: @thread_id }%>
       </div>
     </div>
   </div>
