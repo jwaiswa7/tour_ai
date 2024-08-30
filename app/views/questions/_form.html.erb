@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "new_question", data: {'chat-target': 'input' },  target: "_top" do %>
   <%= form_tag questions_path, class: 'w-full', data: { action: 'submit->chat#submit' } do |f| %>
-    <input type="hidden" name="question[thread_id]" value="<%= thread_id %>">
+    <input type="hidden" data-chat-target="thread" name="question[thread_id]" value="<%= thread_id %>">
     <input type="text"
            class="w-full rounded"
            name="question[question]"
