@@ -1,13 +1,18 @@
 class QuestionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def index
 
   end
 
   def create
-    ai_response = Ai::ChatBot::SendMessage.call(thread_id: question_params[:thread_id], message: question_params[:question])
-    @question = question_params[:question]
-    @answer = ai_response["data"][0]["content"][0]["text"]["value"]
+    ai_response = Ai::ChatBot::SendMessage.call(
+      thread_id: question_params[:thread_id],
+      message: question_params[:question]
+    )
+    @answer = helpers.markdown_to_html(
+       ai_response["data"][0]["content"][0]["text"]["value"]
+      )
   end
 
   private

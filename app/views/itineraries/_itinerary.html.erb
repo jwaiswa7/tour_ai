@@ -6,7 +6,7 @@
         <path class="opacity-75" d="M4 12a8 8 0 018-8V2.5" stroke="currentColor" stroke-width="4"></path>
       </svg>
       <p class="ml-5 text-sm text-gray-400">Generating Itinerary</p>
-      <%= link_to "Cancel", new_itinerary_path, class: 'ml-5 text-sm text-red-500', data: { turbo_frame: "itinerary", turbo_stream: true } %>
+      <%= link_to "Cancel", "#", class: 'ml-5 text-sm text-red-500', data: { turbo_frame: "itinerary", turbo_stream: true } %>
     </div>
     <div data-itinerary-target='message' class="flex items-center justify-center h-10 hidden"></div>
   </div>
