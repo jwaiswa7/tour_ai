@@ -79,6 +79,7 @@ end
 gem 'activeadmin'
 gem 'acts-as-taggable-on', '~> 9.0'
 gem 'devise'
+gem 'redcarpet'
 gem 'ruby-openai', '~> 7.1.0'
-gem 'sidekiq'
 gem 'sassc-rails'
+gem 'sidekiq'

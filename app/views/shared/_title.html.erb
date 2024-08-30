@@ -13,7 +13,10 @@
       </p>
     </div>
     <div class="lg:w-1/2">
-      <%= image_tag "home/hero.jpg", class: "w-full h-auto" %>
+      <div data-controller="chat">
+        <%= render "questions/answer" %>
+        <%= render partial: "questions/form", locals:  {thread_id: @thread_id }%>
+      </div>
     </div>
   </div>
 </section>
