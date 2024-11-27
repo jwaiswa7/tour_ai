@@ -15,17 +15,22 @@ export default class extends Controller {
     if (message.length > 0) {
       this.messagesTarget.appendChild(this.createChatMessage(message));
       this.inputTarget.value = ""
+
+      // disable the input field
+      this.inputTarget.disabled = true;
+
+      this.getAIMessage(message);
     }else{
       console.log("empty")
     }
 
     this.inputTarget.value = ""
 
-    this.getAIMessage(message);
-
   }
 
   async getAIMessage(message) {
+
+    this.messagesTarget.appendChild(this.createAIWaitingElement());
 
     const thread_id = this.threadIdTarget.value.trim();
 
@@ -50,9 +55,16 @@ export default class extends Controller {
 
       const data = await response.json();
       
+      // get element with id aiWaiting
+      const aiWaitingElement = document.getElementById("aiWaiting");
+      
+      this.messagesTarget.removeChild(aiWaitingElement);
+
       this.messagesTarget.appendChild(this.createAIMessage(data.message));
 
-      // this.inputTarget.value = ""; // Clear the input field after successful submission
+      // enable the input field
+      this.inputTarget.disabled = false;
+
     } catch (error) {
       console.error("Failed to send message:", error);
       alert("There was a problem sending your message. Please try again.");
@@ -184,6 +196,64 @@ export default class extends Controller {
     messageParagraph.appendChild(messageText);
   
     // Append the avatar span and message paragraph to the container
+    container.appendChild(avatarSpan);
+    container.appendChild(messageParagraph);
+  
+    return container;
+  }
+
+  createAIWaitingElement() {
+    // Create the main container
+    const container = document.createElement("div");
+    container.className = "flex gap-3 my-4 text-gray-600 text-sm flex-1";
+    container.id = "aiWaiting";
+  
+    // Create the span for the avatar
+    const avatarSpan = document.createElement("span");
+    avatarSpan.className = "relative flex shrink-0 overflow-hidden rounded-full w-8 h-8";
+  
+    // Create the avatar div
+    const avatarDiv = document.createElement("div");
+    avatarDiv.className = "rounded-full bg-gray-100 border p-1";
+  
+    // Add the SVG inside the avatar div
+    avatarDiv.innerHTML = `
+      <svg stroke="none" fill="black" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"></path>
+      </svg>
+    `;
+    avatarSpan.appendChild(avatarDiv);
+  
+    // Create the paragraph for the message
+    const messageParagraph = document.createElement("p");
+    messageParagraph.className = "leading-relaxed";
+  
+    // Add the "AI" label
+    const aiLabel = document.createElement("span");
+    aiLabel.className = "block font-bold text-gray-700";
+    aiLabel.textContent = "AI ";
+    messageParagraph.appendChild(aiLabel);
+  
+    // Add the animated dots SVG
+    const dotsSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    dotsSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    dotsSVG.setAttribute("width", "1em");
+    dotsSVG.setAttribute("height", "1em");
+    dotsSVG.setAttribute("viewBox", "0 0 24 24");
+    dotsSVG.innerHTML = `
+      <circle cx="18" cy="12" r="0" fill="black">
+        <animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate>
+      </circle>
+      <circle cx="12" cy="12" r="0" fill="black">
+        <animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate>
+      </circle>
+      <circle cx="6" cy="12" r="0" fill="black">
+        <animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate>
+      </circle>
+    `;
+    messageParagraph.appendChild(dotsSVG);
+  
+    // Append everything to the container
     container.appendChild(avatarSpan);
     container.appendChild(messageParagraph);
   
