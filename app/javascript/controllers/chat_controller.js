@@ -1,11 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button", "container", "input", "messages"]
-
-  connect() {
-    console.log("connected")
-  }
+  static targets = ["button", "container", "input", "messages", "thread_id"]
 
   toggle() {
     this.containerTarget.classList.toggle("hidden")
@@ -25,8 +21,48 @@ export default class extends Controller {
 
     this.inputTarget.value = ""
 
-    this.messagesTarget.appendChild(this.createAIMessage(message));
+    this.getAIMessage(message);
 
+  }
+
+  async getAIMessage(message) {
+
+    const thread_id = this.inputTarget.value.trim(); // Get the message from the input field
+
+    try {
+      const response = await fetch("/chats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": this.getCSRFToken(),
+        },
+        body: JSON.stringify(
+          { 
+            thread_id: thread_id,
+            message: message
+          }
+        ), // Send the message as JSON
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      this.messagesTarget.appendChild(this.createAIMessage(data.message));
+
+      // this.inputTarget.value = ""; // Clear the input field after successful submission
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      alert("There was a problem sending your message. Please try again.");
+    }
+  }
+
+  getCSRFToken() {
+    // Get the CSRF token from the meta tag added by Rails
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.content : "";
   }
 
   createChatMessage(message) {
@@ -141,9 +177,7 @@ export default class extends Controller {
     nameSpan.textContent = "AI";
   
     // Create the message text
-    const messageText = document.createTextNode(
-      " Sorry, I couldn't find any information in the documentation about that. Expect answer to be less accurate. I could not find the answer to this in the verified sources."
-    );
+    const messageText = document.createTextNode(message);
   
     // Append the name span and message text to the paragraph
     messageParagraph.appendChild(nameSpan);

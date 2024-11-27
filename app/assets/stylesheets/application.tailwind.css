@@ -12,11 +12,11 @@
 
 */
 
-[data-chat-target="messages"] {
+/* [data-chat-target="messages"] {
   overflow-y: auto;
   height: 474px;
   display: table;
   min-width: 100%;
   padding-right: 1rem;
-}
+} */
 
