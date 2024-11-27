@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["button", "container", "input", "messages", "thread_id"]
+  static targets = ["button", "container", "input", "messages", "threadId"]
 
   toggle() {
     this.containerTarget.classList.toggle("hidden")
@@ -27,7 +27,7 @@ export default class extends Controller {
 
   async getAIMessage(message) {
 
-    const thread_id = this.inputTarget.value.trim(); // Get the message from the input field
+    const thread_id = this.threadIdTarget.value.trim();
 
     try {
       const response = await fetch("/chats", {

@@ -19,14 +19,6 @@ module Ai
 
     attr_accessor :thread_id, :message
 
-    def thread
-      @thread ||= client.threads.create
-    end
-
-    def thread_id
-      @thread_id ||= thread['id']
-    end
-
     def build_message
       @build_message ||= client.messages.create(
         thread_id: thread_id,

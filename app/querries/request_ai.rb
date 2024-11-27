@@ -1,31 +1,27 @@
 # frozen_string_literal: true
 class RequestAi
-  def initialize(itinerary_id: nil)
-    begin
-      @itinerary = Itinerary.find(itinerary_id)
-    rescue ActiveRecord::RecordNotFound
-      @itinerary = nil
-    end
+  def initialize(thread_id: , message: )
+    @thread_id = thread_id
+    @message = message
   end
 
   def call
-    return if itinerary.nil?
-    save_run_request
+    send_message
+    get_response
   end
 
   private
 
-  attr_accessor :thread, :itinerary
+  attr_accessor :thread_id, :message
 
-  def create_run
-    @create_run ||= Ai::SendMessage.call(message: itinerary.prompt)
+  def send_message
+    @send_message ||=Ai::SendMessage.new(message: message, thread_id: thread_id).call
   end
 
-  def save_run_request
-    RunRequest.create(
-      itinerary: itinerary,
-      thread_id: create_run[:thread_id],
-      run_id: create_run[:run_id]
-    )
+  def get_response
+    Ai::GetMessages.new(
+      thread_id: send_message[:thread_id],
+      run_id: send_message[:run_id]
+    ).call
   end
 end

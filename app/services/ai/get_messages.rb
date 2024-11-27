@@ -2,37 +2,24 @@
 module Ai
   class GetMessages < Base
 
-    def initialize(itinerary_id: )
-      @itinerary = ::Itinerary.find(itinerary_id)
-      run_request = @itinerary.run_requests.recent.first
-      @thread_id = run_request&.thread_id
-      @run_id = run_request&.run_id
+    def initialize(thread_id:, run_id:)
+      @run_id = run_id
+      @thread_id = thread_id
     end
 
     def call
       return if run_id.nil? || thread_id.nil?
       run_status
-      return false unless run_successfull
-      update_itiernary
+      client_response
     end
 
     private
 
-    attr_accessor :thread_id, :run_id, :run_successfull, :itinerary
-
-    def update_itiernary
-      begin
-        itinerary.update(ai_response: client_response)
-      rescue ActiveRecordInvalid => e
-        puts e.message
-      end
-    end
+    attr_accessor :thread_id, :run_id, :run_successfull
 
     def client_response
       messages = client.messages.list(thread_id: thread_id, parameters: { order: 'desc' })
-      message = messages['data'][0]['content'][0]['text']['value']
-      json_message = message.scan(/```json\s(.*?)\s```/m).flatten[0]
-      JSON.parse(json_message)
+      messages['data'][0]['content'][0]['text']['value']
     end
 
     def run_status
