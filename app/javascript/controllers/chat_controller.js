@@ -14,10 +14,16 @@ export default class extends Controller {
 
     if (message.length > 0) {
       this.messagesTarget.appendChild(this.createChatMessage(message));
+      
       this.inputTarget.value = ""
 
       // disable the input field
       this.inputTarget.disabled = true;
+
+      this.messagesTarget.appendChild(this.createAIWaitingElement());
+
+      // scroll the messages to the bottom
+      this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight;
 
       this.getAIMessage(message);
     }else{
@@ -29,8 +35,6 @@ export default class extends Controller {
   }
 
   async getAIMessage(message) {
-
-    this.messagesTarget.appendChild(this.createAIWaitingElement());
 
     const thread_id = this.threadIdTarget.value.trim();
 
@@ -61,6 +65,9 @@ export default class extends Controller {
       this.messagesTarget.removeChild(aiWaitingElement);
 
       this.messagesTarget.appendChild(this.createAIMessage(data.message));
+
+      // scroll the messages to the bottom
+      this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight;
 
       // enable the input field
       this.inputTarget.disabled = false;
