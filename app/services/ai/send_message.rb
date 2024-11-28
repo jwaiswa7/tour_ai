@@ -32,7 +32,7 @@ module Ai
     def run_id
       @run_id ||= client.runs.create(thread_id: thread_id,
         parameters: {
-            assistant_id: ENV.fetch("ASSISTANT_ID")
+            assistant_id: Rails.application.credentials.openai.assistants.chat_bot.assistant_id
         })['id']
     end
   end
