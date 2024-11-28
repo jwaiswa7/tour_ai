@@ -8,30 +8,7 @@ export default class extends Controller {
   }
 
   handleSubmit(event){
-    event.preventDefault(); 
-
-    const message = this.inputTarget.value.trim();
-
-    if (message.length > 0) {
-      this.messagesTarget.appendChild(this.createChatMessage(message));
-      
-      this.inputTarget.value = ""
-
-      // disable the input field
-      this.inputTarget.disabled = true;
-
-      this.messagesTarget.appendChild(this.createAIWaitingElement());
-
-      // scroll the messages to the bottom
-      this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight;
-
-      this.getAIMessage(message);
-    }else{
-      console.log("empty")
-    }
-
-    this.inputTarget.value = ""
-
+    this.inputTarget.value = "";
   }
 
   async getAIMessage(message) {
