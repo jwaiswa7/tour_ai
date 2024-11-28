@@ -4,13 +4,13 @@ require 'sidekiq'
 class RequestAiJob
   include Sidekiq::Job
 
-  def perform(thread_id)
-    # RequestAi.new(itinerary_id: itinerary_id).call
-    Turbo::StreamsChannel.broadcast_append_to(
-      "chats", # Stream name
-      target: "#{thread_id}-messages", # Turbo Frame ID
+  def perform(thread_id, message)
+    response = RequestAi.new(thread_id: thread_id, message: message).call
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "#{thread_id}-messages-stream", # Stream name
+      target: "#{thread_id}-aiWaiting", # Turbo Frame ID
       partial: "chats/ai_message", # Partial to render
-      locals: { message: "Hello, cool stuff, AI" } # Pass data to the partial
+      locals: { message: response } # Pass data to the partial
     )
   end
 end

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 class ChatsController < ApplicationController
   def create
-    # response = RequestAi.new(thread_id: params[:thread_id], message: params[:message]).call
     @thread_id = chat_params[:thread_id]
     @message = chat_params[:message]
-    RequestAiJob.perform_async(@thread_id)
+    RequestAiJob.perform_async(@thread_id, @message)
     respond_to do |format|
       format.json do
         render json: { message: response }
