@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :questions, only: [:index, :create]
 
+  resources :chats, only: :create, defaults: { format: :json }
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :itineraries do

@@ -2,9 +2,9 @@
 module Ai
   class SendMessage < Base
 
-    def initialize(message:)
+    def initialize(message:, thread_id:)
       @message = message
-      @assistant = Assistant.last
+      @thread_id = thread_id
     end
 
     def call
@@ -17,15 +17,7 @@ module Ai
 
     private
 
-    attr_accessor :assistant, :message
-
-    def thread
-      @thread ||= client.threads.create
-    end
-
-    def thread_id
-      @thread_id ||= thread['id']
-    end
+    attr_accessor :thread_id, :message
 
     def build_message
       @build_message ||= client.messages.create(
@@ -40,7 +32,7 @@ module Ai
     def run_id
       @run_id ||= client.runs.create(thread_id: thread_id,
         parameters: {
-            assistant_id: assistant.remote_id
+            assistant_id: ENV.fetch("ASSISTANT_ID")
         })['id']
     end
   end
