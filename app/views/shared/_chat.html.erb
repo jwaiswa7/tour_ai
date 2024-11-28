@@ -40,18 +40,17 @@
     </div>
     <!-- Input box  -->
     <div class="flex items-center pt-0">
-      <form class="flex items-center justify-center w-full space-x-2"
-          data-action="submit->chat#handleSubmit"
-        >
-        <input type="hidden" name="question[thread_id]" value="<%= @thread_id %>" data-chat-target="threadId">
-        <input
-          data-chat-target="input"
-          class="flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2"
-          placeholder="Type your message" value="">
-        <button
-          class="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2">
-          Send</button>
-      </form>
+    <%= form_with url: questions_path, method: :post, html: { class: "flex items-center justify-center w-full space-x-2", data: { action: "submit->chat#handleSubmit" } } do |form| %>
+      <%= hidden_field_tag "question[thread_id]", @thread_id, data: { chat_target: "threadId" } %>
+    
+      <%= form.text_field :message, 
+                        class: "flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2", 
+                        placeholder: "Type your message", 
+                        data: { chat_target: "input" } %>
+    
+      <%= form.submit "Send", 
+                     class: "inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2" %>
+    <% end %>  
     </div>
 
   </div>
