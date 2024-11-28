@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
 
-  resources :questions, only: [:index, :create]
-
-  resources :chats, only: :create, defaults: { format: :json }
+  resources :chats, only: :create
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
