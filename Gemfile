@@ -86,3 +86,5 @@ gem 'sassc-rails'
 gem 'sidekiq'
 
 gem "solid_queue", "~> 1.1"
+
+gem "mission_control-jobs"

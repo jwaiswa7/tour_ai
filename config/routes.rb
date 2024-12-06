@@ -3,6 +3,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   resources :chats, only: :create
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -18,6 +20,5 @@ Rails.application.routes.draw do
   # authenticate :user, ->(user) { user.admin? } do
   #   mount Sidekiq::Web => '/sidekiq'
   # end
-
-  mount Sidekiq::Web => '/sidekiq'
+  
 end
