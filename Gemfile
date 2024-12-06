@@ -84,3 +84,5 @@ gem 'redcarpet'
 gem 'ruby-openai', '~> 7.1.0'
 gem 'sassc-rails'
 gem 'sidekiq'
+
+gem "solid_queue", "~> 1.1"
