@@ -2,6 +2,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :users
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
 

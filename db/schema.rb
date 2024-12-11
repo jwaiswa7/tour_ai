@@ -39,4 +39,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_08_14_122326) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
+
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
+
 end
