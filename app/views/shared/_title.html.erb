@@ -10,9 +10,16 @@
       </p>
     </div>
     <div class="lg:w-1/2">
-      <div>
-        <%= render 'sessions/form' %>
-      </div>
+      <turbo-frame id="devise-form">
+        <div data-controller="toggle-signup">
+          <div data-toggle-signup-target="loginForm" >
+            <%= render 'sessions/form' %>
+          </div>
+          <div data-toggle-signup-target="signupForm" class="hidden">
+            <%= render 'registrations/form' %>
+          </div>
+        </div>
+      </turbo-frame>
     </div>
   </div>
 </section>
