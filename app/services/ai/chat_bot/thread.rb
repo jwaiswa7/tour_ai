@@ -10,11 +10,15 @@ module Ai
       private
 
       def thread
-        @thread ||= client.threads.create
+        begin
+          @thread ||= client.threads.create
+        rescue Faraday::ConnectionFailed
+          Rails.logger.error "Failed to connect to OpenAI"
+        end
       end
 
       def thread_id
-        thread['id']
+        thread['id'] rescue nil
       end
     end
   end
