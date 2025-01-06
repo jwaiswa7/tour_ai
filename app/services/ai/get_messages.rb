@@ -36,7 +36,7 @@ module Ai
           break # Exit loop and report result to user
         when 'requires_action'
           puts 'action required'
-          break # Handle tool calls (see below)
+          action_required(response)
         when 'cancelled', 'failed', 'expired'
           puts response['last_error'].inspect
           break # or `exit`
@@ -44,6 +44,41 @@ module Ai
           puts "Unknown status response: #{status}"
         end
       end
+    end
+
+    def action_required(response)
+      tools_to_call = response.dig('required_action', 'submit_tool_outputs', 'tool_calls')
+
+      my_tool_outputs = tools_to_call.map { |tool|
+        # Call the functions based on the tool's name
+        function_name = tool.dig('function', 'name')
+        arguments = JSON.parse(
+          tool.dig("function", "arguments"),
+          { symbolize_names: true },
+        )
+    
+        tool_output = case function_name
+        when "required_action"
+          required_action(**arguments)
+        else 
+          'Unknown function'
+        end
+      
+        {
+          tool_call_id: tool['id'],
+          output: tool_output,
+        }
+      }
+
+      client.runs.submit_tool_outputs(
+        thread_id: thread_id,
+        run_id: run_id,
+        parameters: { tool_outputs: my_tool_outputs }
+      )
+    end
+
+    def required_action(location: nil)
+      return true
     end
   end
 end
