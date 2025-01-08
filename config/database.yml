@@ -27,7 +27,7 @@ development:
     database: tour_ai_development
   queue:
     <<: *primary
-    database: tour_ai_development_queue
+    database: tour_ai_development
     migrations_paths: db/queue_migrate
 
 test:
@@ -35,7 +35,4 @@ test:
   database: tour_ai_test
 
 production:
-  <<: *default
-  database: tour_ai_production
-  username: tour_ai
-  password: <%= ENV["TOUR_AI_DATABASE_PASSWORD"] %>
+  url: <%= ENV.fetch("DATABASE_URL") { "postgres://localhost/tour_ai_production" } %>
