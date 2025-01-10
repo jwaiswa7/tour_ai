@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
    }
 
-  mount MissionControl::Jobs::Engine, at: "/jobs"
 
   resources :chats, only: :create
 
@@ -24,5 +23,6 @@ Rails.application.routes.draw do
   # authenticate :user, ->(user) { user.admin? } do
   #   mount Sidekiq::Web => '/sidekiq'
   # end
-  
+  mount Sidekiq::Web => '/sidekiq'
+
 end

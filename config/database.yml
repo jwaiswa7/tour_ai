@@ -22,13 +22,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  primary: &primary
-    <<: *default
-    database: tour_ai_development
-  queue:
-    <<: *primary
-    database: tour_ai_development
-    migrations_paths: db/queue_migrate
+  <<: *default
+  database: tour_ai_development
 
 test:
   <<: *default

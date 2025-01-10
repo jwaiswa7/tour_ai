@@ -15,3 +15,5 @@ bundle exec rails db:migrate
 
 # If you're using a Hobby instance type, you need to create the admin user
 bundle exec rake admin:add_user
+
+bundle exec sidekiq
