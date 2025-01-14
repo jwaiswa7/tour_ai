@@ -42,3 +42,6 @@ node_modules
 
 # ignore env file
 .env
+
+# might have to remove this later
+db/queue_schema.rb

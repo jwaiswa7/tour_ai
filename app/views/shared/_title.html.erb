@@ -10,16 +10,20 @@
       </p>
     </div>
     <div class="lg:w-1/2">
-      <turbo-frame id="devise-form">
-        <div data-controller="toggle-signup">
-          <div data-toggle-signup-target="loginForm" >
-            <%= render 'sessions/form' %>
+      <% unless current_user %>
+        <turbo-frame id="devise-form">
+          <div data-controller="toggle-signup">
+            <div data-toggle-signup-target="loginForm" >
+              <%= render 'sessions/form' %>
+            </div>
+            <div data-toggle-signup-target="signupForm" class="hidden">
+              <%= render 'registrations/form' %>
+            </div>
           </div>
-          <div data-toggle-signup-target="signupForm" class="hidden">
-            <%= render 'registrations/form' %>
-          </div>
-        </div>
-      </turbo-frame>
+        </turbo-frame>
+      <% else %>
+        Welcome <%= current_user.email %> <%= link_to 'Sign out', destroy_user_session_path, class: 'text-[#111827E6] hover:underline' %>
+      <% end %>
     </div>
   </div>
 </section>
