@@ -1,0 +1,14 @@
+<div class="fixed bottom-4 left-0 w-full flex justify-center">
+  <div class="w-full max-w-2xl bg-gray-200 p-6 rounded-lg shadow-lg mx-4">
+    <p>Let's build your itinerary together</p>
+    <%= form_with model: chat do |f| %>
+      <%= f.hidden_field :thread_id, value: chat.thread_id %>
+      <div class="block">
+        <%= f.text_field :message, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", data: {controller: "instructions" } %>
+      </div>
+      <div class="block mt-2">
+        <%= f.submit 'Ask anything', class: 'text-sm bg-gray-800 text-white font-medium py-2 px-4 rounded-lg hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:outline-none' %>
+      </div>
+    <% end %>
+  </div>
+</div>
