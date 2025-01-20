@@ -1,0 +1,150 @@
+[
+  {
+    "title": "Maasai Mara National Reserve",
+    "description": "National reserve",
+    "rating": 4.7,
+    "reviews": 2600,
+    "price": "$200.00",
+    "extracted_price": 200,
+    "thumbnail": "https://serpapi.com/searches/67878bd4162769d6b44ab3cd/images/95a9dd060a6c643de8e3e14eae62cbdac85a7661a702a9ef0e1cb0a1408aaa4a.jpeg"
+  },
+  {
+    "title": "Mount Kilimanjaro",
+    "description": "Volcano",
+    "rating": 4.5,
+    "reviews": 3500,
+    "thumbnail": "https://serpapi.com/searches/67878bd4162769d6b44ab3cd/images/95a9dd060a6c643de8e3e14eae62cbdaf1f53b66b6167f7744f7edf33b89fa10.jpeg"
+  },
+  {
+    "title": "Serengeti National Park",
+    "description": "National park",
+    "rating": 4.8,
+    "reviews": 6300,
+    "thumbnail": "https://serpapi.com/searches/67878bd4162769d6b44ab3cd/images/95a9dd060a6c643de8e3e14eae62cbda26f651b4a263ab60b2fa230f516acaa9.jpeg"
+  },
+  {
+    "title": "Kenya",
+    "description": "Country",
+    "thumbnail": "https://serpapi.com/searches/67878bd4162769d6b44ab3cd/images/95a9dd060a6c643de8e3e14eae62cbdac6eaae4b382cad953daebf40914f0b7c.jpeg"
+  },
+  {
+    "title": "Uganda",
+    "description": "Country",
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipPQjOBcbCaa0ECpdUtglEFe9TH9VWhS2OqiQKYo=w148-h148-n-k-no"
+  },
+  {
+    "title": "Bwindi Impenetrable Forest",
+    "description": "Woods",
+    "rating": 4.6,
+    "reviews": 119,
+    "price": "$40.00",
+    "extracted_price": 40,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipNzzinBRV_oOtejEd413wSzBIoYHF1yd_wIafVX=w148-h148-n-k-no"
+  },
+  {
+    "title": "Nairobi National Park",
+    "description": "National park",
+    "rating": 4.5,
+    "reviews": 10000,
+    "price": "$43.00",
+    "extracted_price": 43,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipOHUJILw3bKhTzR7NAccXnAmj19FQMAvbFPepdQ=w148-h148-n-k-no"
+  },
+  {
+    "title": "Amboseli National Park",
+    "description": "National park",
+    "rating": 4.7,
+    "reviews": 4400,
+    "price": "$60.00",
+    "extracted_price": 60,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipPyKzvATjUXOgMxFV3zeZ27qb1kMbox2aHlrBUg=w148-h148-n-k-no"
+  },
+  {
+    "title": "Tsavo East National Park",
+    "description": "National park",
+    "rating": 4.5,
+    "reviews": 6000,
+    "price": "$52.00",
+    "extracted_price": 52,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipNrRMTmbYwpl-rRzaYIcHIQsdHpKWiwUhZguzZp=w148-h148-n-k-no"
+  },
+  {
+    "title": "Murchison Falls National Park",
+    "description": "National park",
+    "rating": 4.5,
+    "reviews": 3100,
+    "price": "$45.00",
+    "extracted_price": 45,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipPvPVf_M9eAQvby7Lp6DXmnUQHkdd7Te4rhnPpG=w148-h148-n-k-no"
+  },
+  {
+    "title": "Tanzania",
+    "description": "Country",
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipNefB2arYLryYjFeV0y8BWiqCISJJ23mQzojidl=w148-h148-n-k-no"
+  },
+  {
+    "title": "Queen Elizabeth National Park",
+    "description": "National park",
+    "rating": 4.4,
+    "reviews": 2800,
+    "price": "$40.00",
+    "extracted_price": 40,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipMqRbT_P64REjgZH4ms5Cnme5iS6upBGL-e_9eO=w148-h148-n-k-no"
+  },
+  {
+    "title": "Unguja",
+    "description": "Island",
+    "rating": 4.5,
+    "reviews": 3700,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipPf2zOfL-7sqgLUa9m7UfrhiCnJBKdJ68fwpHQt=w148-h148-n-k-no"
+  },
+  {
+    "title": "Serengeti",
+    "description": "Administrative Area2",
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipMblK7dbSDz7bFnMolaKgEEBpL0Kn_VL8fAOA4d=w148-h148-n-k-no"
+  },
+  {
+    "title": "Uganda National Mosque",
+    "description": "Mosque",
+    "rating": 4.5,
+    "reviews": 2000,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipNXKsjBIW6fJQ7XPpqxO2rCjzNhR7kWDRrsRDdj=w148-h148-n-k-no"
+  },
+  {
+    "title": "Ndere Cultural Centre",
+    "description": "Cultural center",
+    "rating": 4.3,
+    "reviews": 4200,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipMFUg-y_XzfmLqbBfrlCSIH4SKTU38nyQTVr4D3=w148-h148-n-k-no"
+  },
+  {
+    "title": "Lake Mburo National Park",
+    "description": "National park",
+    "rating": 4.4,
+    "reviews": 958,
+    "price": "$40.00",
+    "extracted_price": 40,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipOQJGe2Bu8DDv2E7c2dHR5dddGbutSo6IZt9OLh=w148-h148-n-k-no"
+  },
+  {
+    "title": "Lalibela",
+    "description": "Locality",
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipNScAb1LYnVg8CJyne5EFz8GPd5-MEnlSiJDbKL=w148-h148-n-k-no"
+  },
+  {
+    "title": "Kibale National Park",
+    "description": "National park",
+    "rating": 4.5,
+    "reviews": 611,
+    "price": "$40.00",
+    "extracted_price": 40,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipOlvsjZvgAmnkVzqeZHhK-NYsLY1gSAAZOmQfFd=w148-h148-n-k-no"
+  },
+  {
+    "title": "Arusha National Park",
+    "description": "National park",
+    "rating": 4.4,
+    "reviews": 866,
+    "thumbnail": "https://lh5.googleusercontent.com/p/AF1QipNFbxuoCnbDqQdq2FqdrFqOuw3jkYjip01zNN_W=w148-h148-n-k-no"
+  }
+]
