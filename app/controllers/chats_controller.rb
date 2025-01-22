@@ -3,10 +3,6 @@ class ChatsController < ApplicationController
 
   before_action :set_chat, only: %i[ show edit update destroy ]
 
-
-  def edit
-
-  end
   def create
     @chat = Chat.new(chat_params)
     respond_to do |format|
@@ -23,6 +19,14 @@ class ChatsController < ApplicationController
     #   end
     #   format.turbo_stream
     # end
+  end
+
+  def edit
+
+  end
+
+  def update
+    @message = chat_params[:message]
   end
 
   private
