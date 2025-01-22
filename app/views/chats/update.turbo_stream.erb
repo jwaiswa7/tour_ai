@@ -1,4 +1,4 @@
-<turbo-stream action="append" target=<%= "#{@thread_id}-messages" %> >
+<turbo-stream action="append" target=<%= "#{@chat.thread_id}-messages" %> >
   <template>
     <!-- User input -->
     <div class="flex gap-3 my-4 text-gray-600 text-sm flex-1">
@@ -17,7 +17,7 @@
     </div>
 
     <!-- AI waiting -->
-    <div class="flex gap-3 my-4 text-gray-600 text-sm flex-1" id=<%= "#{@thread_id}-aiWaiting" %>>
+    <div class="flex gap-3 my-4 text-gray-600 text-sm flex-1" id=<%= "#{@chat.thread_id}-aiWaiting" %>>
       <span
         class="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
         <div class="rounded-full bg-gray-100 border p-1">
