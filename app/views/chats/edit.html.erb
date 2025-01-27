@@ -1,18 +1,18 @@
 <!-- Outer Container -->
   <div class="flex flex-col lg:flex-row h-screen">
     <!-- Left Div (Chat Section) -->
-    <div class="w-full lg:w-1/2 h-screen bg-white border-r flex flex-col">
-      <!-- Chat Messages (Scrollable Area) -->
+    <div class="w-full lg:w-1/2 h-screen bg-white border-r flex flex-col" data-controller="chat" >
       <div class="flex-grow overflow-y-auto p-4 space-y-6">
-        <% 5.times do %>
-        <%= render partial: "ai_message", locals: { message: "Hello, how can I help you today?" } %>
-        <!-- User Message -->
-        <%= render partial: "user_message", locals: { message: "Hello, how can I help you today?" } %>
-        <% end %>
+        <turbo-frame id=<%= "#{@chat.thread_id}-messages" %> >
+          <%= render partial: "ai_message", locals: { message: "Hello, how can I help you today?" } %>
+          <!-- User Message -->
+          <!-- <%= render partial: "user_message", locals: { message: "Hello, how can I help you today?" } %> -->
+        </turbo-frame>
       </div>
       <div class="border-t p-4">
         <%= render partial: "chats/form", locals: { chat: @chat } %>
       </div>
+      <%= turbo_stream_from "#{@chat.thread_id}-messages-stream" %>
     </div>
 
     <!-- Right Div (Styled with Rounded Borders, Shadow, and White Background) -->
