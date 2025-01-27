@@ -8,8 +8,7 @@ export default class extends Controller {
   }
 
   handleSubmit(event){
-    this.inputTarget.value = "";
+    this.inputTarget.value = "Submitting...";
     this.inputTarget.disabled = true;
   }
-
 }
