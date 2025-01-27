@@ -3,6 +3,8 @@ class ChatsController < ApplicationController
 
   before_action :set_chat, only: %i[ show edit update destroy ]
 
+  layout "full_screen", only: :edit
+
   def create
     @chat = Chat.new(chat_params)
     respond_to do |format|
@@ -27,6 +29,7 @@ class ChatsController < ApplicationController
 
   def update
     @message = chat_params[:message]
+    RequestAiJob.perform_later(@chat.thread_id, @message)
   end
 
   private
