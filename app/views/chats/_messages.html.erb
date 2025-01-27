@@ -1,0 +1,13 @@
+<div id=<%= "#{thread_id}-messages" %> >
+  <% if messages.empty? %>
+    <%= render partial: "chats/ai_message", locals: { message: "Hello! How can I help you today?", time: Time.now.strftime("%b %d %H:%M") } %>
+  <% else %>
+    <% messages.each do |message| %>
+      <% if message["role"] == "assistant" %>
+        <%= render partial: "chats/ai_message", locals: { message: message['content'][0]['text']['value'], time: Time.at(message['created_at']).strftime("%b %d %H:%M") } %>
+      <% else %>
+        <%= render partial: "chats/user_message", locals: { message: message['content'][0]['text']['value'], time: Time.at(message['created_at']).strftime("%b %d %H:%M") } %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

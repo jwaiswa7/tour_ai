@@ -9,22 +9,20 @@ class ChatsController < ApplicationController
     @chat = Chat.new(chat_params)
     respond_to do |format|
       if @chat.save
+        session[:message] = @chat.message
         format.turbo_stream { redirect_to edit_chat_path(@chat, format: :html) }
       end
     end
-    # @thread_id = chat_params[:thread_id]
-    # @message = chat_params[:message]
-    # RequestAiJob.perform_later(@thread_id, @message)
-    # respond_to do |format|
-    #   format.json do
-    #     render json: { message: response }
-    #   end
-    #   format.turbo_stream
-    # end
   end
 
   def edit
-
+    if session.key?(:message)
+      @message = session[:message]
+      RequestAiJob.perform_later(@chat.thread_id, @message)
+      session.delete(:message)
+    else
+      LoadMessagesJob.perform_later(@chat.thread_id)
+    end
   end
 
   def update

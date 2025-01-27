@@ -1,7 +1,7 @@
 <turbo-stream action="append" target=<%= "#{@chat.thread_id}-messages" %> >
   <template>
-    <%= render partial: "user_message", locals: { message: @message } %>
+    <%= render partial: "user_message", locals: { message: @message, time: Time.now.strftime("%b %d %H:%M")} %>
 
-    <%= render partial: "ai_waiting_message", locals: { thread_id: @chat.thread_id } %>
+    <%= render partial: "ai_waiting_message", locals: { thread_id: @chat.thread_id, time: Time.now.strftime("%b %d %H:%M") } %>
   </template>
 </turbo-stream>
