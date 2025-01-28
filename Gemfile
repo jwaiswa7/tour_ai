@@ -93,3 +93,5 @@ gem "mission_control-jobs"
 gem "google_sign_in", "~> 1.2"
 
 gem "langchainrb", "~> 0.19.3"
+
+gem "httparty", "~> 0.22.0"

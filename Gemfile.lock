@@ -152,6 +152,10 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hashie (5.0.0)
+    httparty (0.22.0)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -403,6 +407,7 @@ DEPENDENCIES
   devise
   dotenv
   google_sign_in (~> 1.2)
+  httparty (~> 0.22.0)
   importmap-rails
   jbuilder
   langchainrb (~> 0.19.3)
