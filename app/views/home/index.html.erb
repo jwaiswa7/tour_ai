@@ -1,6 +1,63 @@
-<%= render "shared/header" %>
-<%= render "shared/title" %>
-<%= render "shared/main_features" %>
-<%= render "shared/grow_business" %>
-<%#= render "shared/chat" %>
+<!-- Hero Section -->
+<section class="text-center py-20 px-5 bg-blue-50">
+  <h1 class="text-4xl font-bold text-gray-900">Your Smart AI Travel Planner</h1>
+  <p class="mt-4 text-lg text-gray-600">Plan your perfect trip with ease. Let AI craft personalized itineraries for your next adventure!</p>
+</section>
+<!-- How It Works -->
+<section class="py-16 px-5 text-center bg-cover bg-center background-image">
+<h2 class="text-3xl font-semibold text-white">How It Works</h2>
+<div class="flex flex-wrap justify-center gap-6 mt-8">
+    <div class="w-80 p-6 bg-white bg-opacity-80 rounded-lg shadow hover:bg-gray-200 transition duration-300">
+        <h3 class="text-xl font-medium">1. Start a Chat</h3>
+        <p class="text-gray-600">Interact with our AI assistant to begin planning.</p>
+    </div>
+    <div class="w-80 p-6 bg-white bg-opacity-80 rounded-lg shadow hover:bg-gray-200 transition duration-300">
+        <h3 class="text-xl font-medium">2. Answer Questions</h3>
+        <p class="text-gray-600">Provide details like destination, dates, number of people, and budget.</p>
+    </div>
+    <div class="w-80 p-6 bg-white bg-opacity-80 rounded-lg shadow hover:bg-gray-200 transition duration-300">
+        <h3 class="text-xl font-medium">3. Get Your AI Itinerary</h3>
+        <p class="text-gray-600">Receive a customized itinerary based on your preferences.</p>
+    </div>
+    <div class="w-80 p-6 bg-white bg-opacity-80 rounded-lg shadow hover:bg-gray-200 transition duration-300">
+        <h3 class="text-xl font-medium">4. Edit & Finalize</h3>
+        <p class="text-gray-600">Modify your itinerary as needed before finalizing your trip.</p>
+    </div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="bg-yellow-50 py-16 px-5 text-center">
+  <h2 class="text-3xl font-semibold text-gray-900">Why Choose Our AI?</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+    <div class="p-6 bg-white rounded-lg shadow">
+      <h3 class="text-lg font-medium">✅ Personalized Plans</h3>
+      <p class="text-gray-600">Tailored to your preferences.</p>
+    </div>
+    <div class="p-6 bg-white rounded-lg shadow">
+      <h3 class="text-lg font-medium">✅ Real-Time Updates</h3>
+      <p class="text-gray-600">Keeps up with travel trends.</p>
+    </div>
+    <div class="p-6 bg-white rounded-lg shadow">
+      <h3 class="text-lg font-medium">✅ Budget-Friendly</h3>
+      <p class="text-gray-600">Smart suggestions for your budget.</p>
+    </div>
+    <div class="p-6 bg-white rounded-lg shadow">
+      <h3 class="text-lg font-medium">✅ Local Insights</h3>
+      <p class="text-gray-600">Hidden gems & must-visit spots.</p>
+    </div>
+  </div>
+</section>
+<!-- Testimonials -->
+<section class="py-16 px-5 text-center">
+  <h2 class="text-3xl font-semibold text-gray-900">What Our Users Say</h2>
+  <div class="mt-8 max-w-2xl mx-auto bg-gray-100 p-6 rounded-lg shadow">
+    <p class="text-gray-700 italic">“I saved hours of planning! The AI picked the best spots for me!”</p>
+    <p class="text-gray-900 font-semibold mt-2">- Sarah J.</p>
+  </div>
+</section>
+<!-- Call to Action -->
+<section class="bg-orange-100 py-16 px-5 text-center">
+  <h2 class="text-3xl font-semibold text-gray-900">Ready to Plan Your Next Trip?</h2>
+  <button class="mt-6 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600">Start Planning Now</button>
+</section>
 <%= render partial: "shared/floating_form", locals: { chat: @chat } %>
