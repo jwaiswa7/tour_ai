@@ -58,8 +58,8 @@ module Ai
         )
     
         tool_output = case function_name
-        when "required_action"
-          required_action(**arguments)
+        when "activities"
+          activities(**arguments)
         else 
           'Unknown function'
         end
@@ -77,8 +77,8 @@ module Ai
       )
     end
 
-    def required_action(location: nil)
-      return true
+    def activities(destination: nil)
+      {activities: ['Jumping', 'Claping', 'Dancing', 'Singing']}.to_json
     end
   end
 end
