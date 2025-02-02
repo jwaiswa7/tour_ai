@@ -144,6 +144,7 @@ GEM
       activesupport (>= 6.1)
     google-id-token (1.4.2)
       jwt (>= 1)
+    google_search_results (2.2.0)
     google_sign_in (1.2.1)
       google-id-token (>= 1.4.0)
       oauth2 (>= 1.4.0)
@@ -406,6 +407,7 @@ DEPENDENCIES
   debug
   devise
   dotenv
+  google_search_results (~> 2.2)
   google_sign_in (~> 1.2)
   httparty (~> 0.22.0)
   importmap-rails
