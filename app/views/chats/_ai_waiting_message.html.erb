@@ -18,9 +18,8 @@
     </svg>
   </div>
   <!-- Chat Bubble -->
-  <div class="bg-gray-200 p-3 rounded-lg max-w-xs">
-    <p class="text-sm text-gray-500 mb-1">AI</p>
-    <p id=<%= "#{thread_id}-aiWaiting" %> >
+  <div class="bg-gray-200 p-3 rounded-lg max-w-xs text-sm">
+    <p id=<%= "#{thread_id}-aiWaiting" %> class="text-sm" >
       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
         <circle cx="18" cy="12" r="0" fill="black">
           <animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"/>
