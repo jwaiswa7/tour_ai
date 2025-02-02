@@ -58,8 +58,10 @@ module Ai
         )
     
         tool_output = case function_name
-        when "activities"
-          activities(**arguments)
+        when "sights"
+          sights(**arguments)
+        when "hotels"
+          hotels(**arguments)
         else 
           'Unknown function'
         end
@@ -77,8 +79,51 @@ module Ai
       )
     end
 
-    def activities(destination: nil)
-      {activities: ['Jumping', 'Claping', 'Dancing', 'Singing']}.to_json
+    def sights(destination: nil)
+      params = {
+          engine: "google",
+          q: "Top sights in #{destination}",
+          api_key: Rails.application.credentials.serp_api_key
+        }
+      search = search = GoogleSearch.new(params)
+      puts "Getting sights for #{destination}"
+      top_sights = search.get_hash
+      top_sights = top_sights[:top_sights][:sights]&.map{ |sight| { name: sight[:title], description: sight[:description]} }
+      {destination: destination, top_sights: top_sights}.to_json
+    end
+
+    def hotels(destination: nil)
+      params = {
+        api_key: Rails.application.credentials.serp_api_key,
+        engine: "google_hotels",
+        q: "#{destination} Resorts",
+        hl: "en",
+        gl: "us",
+        check_in_date: Date.today.strftime("%Y-%m-%d"),
+        check_out_date: (Date.today + 7.days).strftime("%Y-%m-%d"),
+        currency: "USD"
+      }
+
+      search = GoogleSearch.new(params)
+
+      puts "Getting Hotels for #{destination}"
+
+      hash_results = search.get_hash
+      info = hash_results[:properties]&.map{ |property| 
+        {
+          name: property[:name],
+          cordinates: property[:gps_coordinates],
+          rate_per_night: property[:rate_per_night],
+          amenities: property[:amenities],
+          class: property[:hotel_class],
+          rating: property[:overall_rating]
+        }
+      }
+
+      {
+        destination: destination,
+        hotels: info
+    }.to_json
     end
   end
 end

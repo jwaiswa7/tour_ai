@@ -95,3 +95,5 @@ gem "google_sign_in", "~> 1.2"
 gem "langchainrb", "~> 0.19.3"
 
 gem "httparty", "~> 0.22.0"
+
+gem "google_search_results", "~> 2.2"
