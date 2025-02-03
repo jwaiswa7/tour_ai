@@ -116,7 +116,8 @@ module Ai
           rate_per_night: property[:rate_per_night],
           amenities: property[:amenities],
           class: property[:hotel_class],
-          rating: property[:overall_rating]
+          rating: property[:overall_rating],
+          url: property[:link]
         }
       }
 

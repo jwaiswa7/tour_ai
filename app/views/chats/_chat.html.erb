@@ -1,13 +1,22 @@
-<div data-controller="chat" >
-  <div id=<%= "#{@chat.thread_id}-messages" %> data-chat-target="messages" class="m-2 rounded-lg h-[50rem] overflow-y-auto p-4 space-y-6 bg-white">
-      <% if @message %>
-        <%= render partial: "chats/user_message", locals: { message: @message, time: Time.now.strftime("%b %d %H:%M") } %>
-      <% end %>
-      <%= render partial: "ai_waiting_message", locals: { thread_id: @chat.thread_id } %>
+<div class="fixed bottom-4 left-0 w-full flex justify-center" id="chating">
+  <div class="w-full max-w-2xl bg-gray-200 rounded-lg shadow-lg mx-4">
+    <div data-controller="chat" >
+      <div class="flex items-end justify-end mr-2 mt-2" >   
+        <button class="text-sm bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-blue-600" data-chat-target="button" data-action="click->chat#toggle">Hide Chat</button>
+      </div>
+      <div data-chat-target="container">
+        <div id=<%= "#{@chat.thread_id}-messages" %> data-chat-target="messages" class="m-2 rounded-lg sm:h-[50rem] h-[60vh] overflow-y-auto p-4 space-y-6 bg-white" data-chat-target="messages">
+            <% if @message %>
+              <%= render partial: "chats/user_message", locals: { message: @message, time: Time.now.strftime("%b %d %H:%M") } %>
+            <% end %>
+            <%= render partial: "chats/ai_waiting_message", locals: { thread_id: @chat.thread_id } %>
+          </div>
+        </div>
+        <div class="border-t p-4">
+          <%= render partial: "chats/form", locals: { chat: @chat } %>
+        </div>
+      </div>
+      <%= turbo_stream_from "#{@chat.thread_id}-messages-stream" %>
     </div>
   </div>
-  <div class="border-t p-4">
-    <%= render partial: "chats/form", locals: { chat: @chat } %>
-  </div>
-  <%= turbo_stream_from "#{@chat.thread_id}-messages-stream" %>
 </div>
