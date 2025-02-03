@@ -1,14 +1,16 @@
 <div class="fixed bottom-4 left-0 w-full flex justify-center">
-  <div class="w-full max-w-2xl bg-gray-200 p-6 rounded-lg shadow-lg mx-4">
-    <p>Let's build your itinerary together</p>
-    <%= form_with model: chat do |f| %>
-      <%= f.hidden_field :thread_id, value: chat.thread_id %>
-      <div class="block">
-        <%= f.text_field :message, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", data: {controller: "instructions" } %>
-      </div>
-      <div class="block mt-2">
-        <%= f.submit 'Plan my trip', class: "text-sm bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600" %>
-      </div>
-    <% end %>
+  <div class="w-full max-w-2xl bg-gray-200 rounded-lg shadow-lg mx-4">
+    <div id="chating" class="m-6" >
+      <p>Let's build your itinerary together</p>
+      <%= form_with model: chat do |f| %>
+        <%= f.hidden_field :thread_id, value: chat.thread_id %>
+        <div class="block">
+          <%= f.text_field :message, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", data: {controller: "instructions" } %>
+        </div>
+        <div class="block mt-2">
+          <%= f.submit 'Plan my trip', class: "text-sm bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

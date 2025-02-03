@@ -5,7 +5,7 @@
       <div class="flex-grow overflow-y-auto p-4 space-y-6">
         <div id=<%= "#{@chat.thread_id}-messages" %> data-chat-target="messages" >
           <% if @message %>
-            <%= render partial: "chats/user_message", locals: { message: @message, time: Time.now.strftime("%b %d %H:%M") } %>
+            <%= render partial: "chats/user_message", locals: { message: @message } %>
           <% end %>
           <%= render partial: "ai_waiting_message", locals: { thread_id: @chat.thread_id } %>
         </div>

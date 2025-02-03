@@ -5,7 +5,10 @@ class RequestAiJob < ApplicationJob
   self.queue_adapter = :solid_queue
 
   def perform(thread_id, message)
-    response = RequestAi.new(thread_id: thread_id, message: message).call
+    # response = RequestAi.new(thread_id: thread_id, message: message).call
+    sleep(5)
+    response = "Hello"
+    
     chat = Chat.find_by(thread_id: thread_id)
 
     Turbo::StreamsChannel.broadcast_replace_to(

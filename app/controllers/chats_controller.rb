@@ -7,22 +7,19 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
+    thread_id = Ai::Thread.call[:thread_id]
+    @chat.thread_id = thread_id
     respond_to do |format|
       if @chat.save
-        session[:message] = @chat.message
-        format.turbo_stream { redirect_to edit_chat_path(@chat, format: :html) }
+        RequestAiJob.perform_later(@chat.thread_id, chat_params[:message])
+        @message = chat_params[:message]
+        format.turbo_stream
       end
     end
   end
 
   def edit
-    if session.key?(:message)
-      @message = session[:message]
-      RequestAiJob.perform_later(@chat.thread_id, @message)
-      session.delete(:message)
-    else
-      LoadMessagesJob.perform_later(@chat.thread_id)
-    end
+    LoadMessagesJob.perform_later(@chat.thread_id)
   end
 
   def update
