@@ -1,0 +1,13 @@
+<div data-controller="chat" >
+  <div id=<%= "#{@chat.thread_id}-messages" %> data-chat-target="messages" class="m-2 rounded-lg h-[50rem] overflow-y-auto p-4 space-y-6 bg-white">
+      <% if @message %>
+        <%= render partial: "chats/user_message", locals: { message: @message, time: Time.now.strftime("%b %d %H:%M") } %>
+      <% end %>
+      <%= render partial: "ai_waiting_message", locals: { thread_id: @chat.thread_id } %>
+    </div>
+  </div>
+  <div class="border-t p-4">
+    <%= render partial: "chats/form", locals: { chat: @chat } %>
+  </div>
+  <%= turbo_stream_from "#{@chat.thread_id}-messages-stream" %>
+</div>
