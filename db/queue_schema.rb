@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_20_083840) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_05_121736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -44,6 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_20_083840) do
     t.string "thread_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "itinerary"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
