@@ -25,3 +25,7 @@ Things you may want to cover:
 
 #### SerpAPI
 Integrate with searAPI for real time scraping of data [link](https://serpapi.com/users/sign_in)
+
+#### Database
+Production database is at [neon](https://console.neon.tech/app/projects)
+
