@@ -9,35 +9,35 @@ class RequestAiJob < ApplicationJob
 
     chat = Chat.find_by(thread_id: thread_id)
 
-    Turbo::StreamsChannel.broadcast_replace_to(
-      "#{thread_id}-messages-stream", # Stream name
-      target: "#{thread_id}-aiWaiting", # Turbo Frame ID
-      partial: "chats/ai_response", # Partial to render
-      locals: { message: response } # Pass data to the partial
-    )
-
-    Turbo::StreamsChannel.broadcast_replace_to(
-      "#{thread_id}-messages-stream", # Stream name
-      target: "#{thread_id}-chat-form", # Turbo Frame ID
-      partial: "chats/form", # Partial to render
-      locals: { chat: chat } # Pass data to the partial
-    )
-
     if response.starts_with? "Itinerary"
-      Turbo::StreamsChannel.broadcast_append_to(
+      Turbo::StreamsChannel.broadcast_replace_to(
         "#{thread_id}-messages-stream", # Stream name
-        target: "#{thread_id}-messages", # Turbo Frame ID
-        partial: "chats/ai_message", # Partial to render
-        locals: { message: "Building itinerary ..." }
+        target: "#{thread_id}-aiWaiting", # Turbo Frame ID
+        partial: "chats/ai_building_itinerary", # Partial to render
+        locals: { message: "Building itinerary", thread_id: thread_id } # Pass data to the partial
       )
       structured_response = Structure::Itinerary.call(itinerary: response)
       chat.update(itinerary: structured_response)
 
-      Turbo::StreamsChannel.broadcast_append_to(
+      Turbo::StreamsChannel.broadcast_replace_to(
         "#{thread_id}-messages-stream", # Stream name
-        target: "#{thread_id}-messages", # Turbo Frame ID
-        partial: "chats/ai_message", # Partial to render
-        locals: { message: "view itinerary #{chat.id}" }
+        target: "#{thread_id}-aiWaiting", # Turbo Frame ID
+        partial: "chats/ai_building_itinerary", # Partial to render
+        locals: { message: "<a href='/chats/#{chat.id}'>View itinerary</a>", thread_id: thread_id } # Pass data to the partial
+      )
+    else 
+      Turbo::StreamsChannel.broadcast_replace_to(
+        "#{thread_id}-messages-stream", # Stream name
+        target: "#{thread_id}-aiWaiting", # Turbo Frame ID
+        partial: "chats/ai_response", # Partial to render
+        locals: { message: response } # Pass data to the partial
+      )
+  
+      Turbo::StreamsChannel.broadcast_replace_to(
+        "#{thread_id}-messages-stream", # Stream name
+        target: "#{thread_id}-chat-form", # Turbo Frame ID
+        partial: "chats/form", # Partial to render
+        locals: { chat: chat } # Pass data to the partial
       )
     end
   end
