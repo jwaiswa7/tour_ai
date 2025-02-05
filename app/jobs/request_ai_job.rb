@@ -22,5 +22,23 @@ class RequestAiJob < ApplicationJob
       partial: "chats/form", # Partial to render
       locals: { chat: chat } # Pass data to the partial
     )
+
+    if response.starts_with? "Itinerary"
+      Turbo::StreamsChannel.broadcast_append_to(
+        "#{thread_id}-messages-stream", # Stream name
+        target: "#{thread_id}-messages", # Turbo Frame ID
+        partial: "chats/ai_message", # Partial to render
+        locals: { message: "Building itinerary ..." }
+      )
+      structured_response = Structure::Itinerary.call(itinerary: response)
+      chat.update(itinerary: structured_response)
+
+      Turbo::StreamsChannel.broadcast_append_to(
+        "#{thread_id}-messages-stream", # Stream name
+        target: "#{thread_id}-messages", # Turbo Frame ID
+        partial: "chats/ai_message", # Partial to render
+        locals: { message: "view itinerary #{chat.id}" }
+      )
+    end
   end
 end
