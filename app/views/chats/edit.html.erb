@@ -1,23 +1,3 @@
-<!-- Outer Container -->
-  <div class="flex flex-col lg:flex-row h-screen">
-    <!-- Left Div (Chat Section) -->
-    <div class="w-full lg:w-1/2 h-screen bg-white border-r flex flex-col" data-controller="chat" >
-      <div class="flex-grow overflow-y-auto p-4 space-y-6">
-        <div id=<%= "#{@chat.thread_id}-messages" %> data-chat-target="messages" >
-          <% if @message %>
-            <%= render partial: "chats/user_message", locals: { message: @message } %>
-          <% end %>
-          <%= render partial: "ai_waiting_message", locals: { thread_id: @chat.thread_id } %>
-        </div>
-      </div>
-      <div class="border-t p-4">
-        <%= render partial: "chats/form", locals: { chat: @chat } %>
-      </div>
-      <%= turbo_stream_from "#{@chat.thread_id}-messages-stream" %>
-    </div>
+<%= render partial: "hotels/hotels" %>
 
-    <!-- Right Div (Styled with Rounded Borders, Shadow, and White Background) -->
-    <div class="hidden lg:flex w-1/2 h-screen items-center justify-center bg-white rounded-lg shadow-lg">
-       <h1 class="text-2xl text-gray-800">Loading..</h1>
-    </div>
-  </div>
+<%= render partial: "activities/activities" %>
