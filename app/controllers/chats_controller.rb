@@ -19,7 +19,7 @@ class ChatsController < ApplicationController
   end
 
   def edit
-    
+    LoadActivitiesJob.perform_later(@chat.id)
   end
 
   def update

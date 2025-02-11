@@ -1,3 +1,9 @@
 <%= render partial: "hotels/hotels" %>
 
-<%= render partial: "activities/activities" %>
+<turbo-frame id=<%= "#{@chat.id}-activities" %> >
+  <div class="container mx-auto px-4">
+    <p>Loading activities</p>
+  </div>
+</turbo-frame>
+
+<%= turbo_stream_from "chat-#{@chat.id}-edit" %>

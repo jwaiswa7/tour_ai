@@ -18,8 +18,8 @@
       <!-- Scrollable container -->
       <div data-scroll-target="container" 
            class="flex overflow-x-auto gap-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
-        <% 5.times do %>
-          <%= render partial: "activities/activity", locals: {name: "Hotel #{rand(1..5)}"} %>
+        <% activities.each do |activity| %>
+          <%= render partial: "activities/activity", locals: {activity: activity} %>
         <% end %>
       </div>
       
