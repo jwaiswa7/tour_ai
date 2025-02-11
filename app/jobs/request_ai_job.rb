@@ -9,21 +9,21 @@ class RequestAiJob < ApplicationJob
 
     chat = Chat.find_by(thread_id: thread_id)
 
-    if response.starts_with? "Itinerary"
+    if response.starts_with? "USER DETAILS"
       Turbo::StreamsChannel.broadcast_replace_to(
         "#{thread_id}-messages-stream", # Stream name
         target: "#{thread_id}-aiWaiting", # Turbo Frame ID
         partial: "chats/ai_building_itinerary", # Partial to render
         locals: { message: "Building itinerary", thread_id: thread_id } # Pass data to the partial
       )
-      structured_response = Structure::Itinerary.call(itinerary: response)
-      chat.update(itinerary: structured_response)
+      structured_response = Structure::UserDetails.call(user_details: response)
+      chat.update(user_details: structured_response)
 
       Turbo::StreamsChannel.broadcast_replace_to(
         "#{thread_id}-messages-stream", # Stream name
         target: "#{thread_id}-aiWaiting", # Turbo Frame ID
         partial: "chats/ai_building_itinerary", # Partial to render
-        locals: { message: "<a href='/chats/#{chat.id}'>View itinerary</a>", thread_id: thread_id } # Pass data to the partial
+        locals: { message: "<a href='/chats/#{chat.id}/edit'>View itinerary</a>", thread_id: thread_id } # Pass data to the partial
       )
     else 
       Turbo::StreamsChannel.broadcast_replace_to(
