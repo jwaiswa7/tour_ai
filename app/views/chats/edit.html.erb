@@ -1,9 +1,24 @@
-<%= render partial: "hotels/hotels" %>
-
-<turbo-frame id=<%= "#{@chat.id}-activities" %> >
-  <div class="container mx-auto px-4">
-    <p>Loading activities</p>
+<div class="flex flex-wrap w-full">
+  <!-- Left scrollable section -->
+  <div class="sm:w-1/2 w-full overflow-y-auto h-dvh bg-gray-100 p-6">
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold">Itinerary</h2>
+      <!-- Example content to demonstrate scrolling -->
+      <div class="space-y-4">
+        <% @chat.itinerary.each do |itinerary| %>
+          <%= render partial: "itineraries/day", locals: { itinerary: itinerary, last_item: @chat.itinerary.last == itinerary } %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</turbo-frame>
-
+  <!-- Right fixed section -->
+  <div class="sm:w-1/2 w-full h-dvh p-6">
+    <%= render partial: "hotels/hotels" %>
+    <turbo-frame id=<%= "#{@chat.id}-activities" %> >
+      <div class="container mx-auto px-4">
+        <p>Loading activities</p>
+      </div>
+    </turbo-frame>
+  </div>
+</div>
 <%= turbo_stream_from "chat-#{@chat.id}-edit" %>
