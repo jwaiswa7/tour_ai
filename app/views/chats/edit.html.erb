@@ -5,8 +5,12 @@
       <h2 class="text-xl font-bold">Itinerary</h2>
       <!-- Example content to demonstrate scrolling -->
       <div class="space-y-4">
-        <% @chat.itinerary.each do |itinerary| %>
-          <%= render partial: "itineraries/day", locals: { itinerary: itinerary, last_item: @chat.itinerary.last == itinerary } %>
+        <% if @chat.itinerary %>
+          <% @chat.itinerary.each do |itinerary| %>
+            <%= render partial: "itineraries/day", locals: { itinerary: itinerary, last_item: @chat.itinerary.last == itinerary } %>
+          <% end %>
+        <% else %>
+          <p>Itinerary is empty, please reload page to view itinerary</p>
         <% end %>
       </div>
     </div>
