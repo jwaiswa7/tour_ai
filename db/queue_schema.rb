@@ -55,6 +55,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_083118) do
     t.date "start_date"
     t.date "end_date"
     t.integer "budget"
+    t.jsonb "ai_response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

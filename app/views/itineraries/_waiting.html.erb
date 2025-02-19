@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "itinerary-#{itinerary.id}-waiting" do %>
+<p>Waiting</p>
+<% end %>
+<%= turbo_stream_from "#{itinerary.id}-itinerary" %>

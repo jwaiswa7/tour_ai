@@ -1,2 +1,18 @@
 <%= render "shared/header" %>
-<%= render partial: "itineraries/new", locals: {itinerary: @itinerary } %>
+<div class="flex flex-wrap w-full">
+  <!-- Left scrollable section -->
+  <div class="sm:w-1/2 w-full overflow-y-auto h-dvh bg-gray-100 p-6">
+    <div id=<%= "new-#{@random}-itinerary" %> >
+      <%= render partial: "itineraries/form", locals: { itinerary: @itinerary, random: @random } %>
+    </div>
+  </div>
+  <!-- Right fixed section -->
+  <div class="sm:w-1/2 w-full h-dvh p-6">
+    <%= render partial: "hotels/hotels" %>
+    <turbo-frame id=<%= "#{@itinerary.id}-activities" %> >
+      <div class="container mx-auto px-4">
+        <p>Loading activities</p>
+      </div>
+    </turbo-frame>
+  </div>
+</div>

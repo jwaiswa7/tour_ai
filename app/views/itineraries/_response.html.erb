@@ -1,0 +1,3 @@
+<% response.each do |itinerary| %>
+  <%= render partial: "itineraries/day", locals: { itinerary: itinerary, last_item: response.last == itinerary } %>
+<% end %>

@@ -4,11 +4,18 @@ class ItineraryJob < ApplicationJob
 
   self.queue_adapter = :solid_queue
   
-  def perform(chat_id)
-    chat = Chat.find(chat_id)
+  def perform(itinerary_id)
+    itinerary = Itinerary.find(itinerary_id)
 
-    itinerary = Structure::Itinerary.call(itinerary: chat.itinerary_string)
+    response = Structure::Itinerary.call(itinerary: itinerary.itinerary_string)
 
-    chat.update(itinerary: itinerary)
+    itinerary.update(ai_response: response)
+
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "#{itinerary.id}-itinerary", # Stream name
+      target: "itinerary-#{itinerary.id}-waiting", # Turbo Frame ID
+      partial: "itineraries/response", # Partial to render
+      locals: { response: response } # Pass data to the partial
+    )
   end
 end

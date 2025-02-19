@@ -7,6 +7,7 @@ class CreateItineraries < ActiveRecord::Migration[8.0]
       t.date :start_date
       t.date :end_date
       t.integer :budget
+      t.jsonb :ai_response
 
       t.timestamps
     end

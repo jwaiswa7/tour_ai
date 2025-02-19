@@ -4,6 +4,7 @@ class ItinerariesController < ApplicationController
 
   def new
     @itinerary = Itinerary.new
+    @random = SecureRandom.uuid
   end
 
   def create
@@ -11,7 +12,14 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @itinerary.save
-          render :create
+          ItineraryJob.perform_later(@itinerary.id)
+          render turbo_stream: [
+            turbo_stream.replace(
+              "new-#{params[:itinerary][:random_id]}-itinerary",
+              partial: "itineraries/waiting",
+              locals: { itinerary: @itinerary }
+            )
+          ]
         else
           render :new
         end
