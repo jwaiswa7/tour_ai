@@ -11,16 +11,9 @@ class ItinerariesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @itinerary.save
-          RequestAi.new(itinerary_id: @itinerary.id).call
-          render turbo_stream: turbo_stream.replace(
-            'ai-form', partial: "itineraries/itinerary",
-            locals: { itinerary: @itinerary }
-          )
+          render :create
         else
-          render turbo_stream: turbo_stream.replace(
-            @itinerary, partial: "itineraries/form",
-            locals: { itinerary: @itinerary }
-          )
+          render :new
         end
       end
     end
@@ -52,16 +45,11 @@ class ItinerariesController < ApplicationController
 
   def itinerary_params
     params.require(:itinerary).permit(
-      :start_date,
-      :end_date,
-      :budget,
-      :accomodation_type,
-      :engagement_level,
-      :weather,
-      :notes,
+      :country,
+      :city,
       :number_of_people,
-      interest_list: [],
-      destination_list: []
+      :start_date,
+      :end_date
     )
   end
 end
