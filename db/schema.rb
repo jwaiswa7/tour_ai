@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_11_125110) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_19_083118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,9 +18,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_11_125110) do
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -46,6 +46,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_11_125110) do
     t.datetime "updated_at", null: false
     t.jsonb "itinerary"
     t.jsonb "user_details"
+  end
+
+  create_table "itineraries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "country"
+    t.string "city"
+    t.integer "number_of_people"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "budget"
+    t.jsonb "ai_response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: MyString
+  city: MyString
+  number_of_people: 1
+  start_date: 2025-02-19
+  end_date: 2025-02-19
+  budget: 1
+
+two:
+  country: MyString
+  city: MyString
+  number_of_people: 1
+  start_date: 2025-02-19
+  end_date: 2025-02-19
+  budget: 1
