@@ -1,4 +1,9 @@
 <%= turbo_frame_tag "itinerary-#{itinerary.id}-waiting" do %>
-<p>Waiting</p>
+  <div class="flex items-center justify-center space-x-2 animate-pulse">
+    <span class="text-gray-500 text-xl font-semibold">Loading</span>
+    <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+    <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-100"></div>
+    <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+  </div>
 <% end %>
 <%= turbo_stream_from "#{itinerary.id}-itinerary" %>

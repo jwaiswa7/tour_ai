@@ -2,7 +2,7 @@
   <div class="container mx-auto px-4">
     <!-- Section Header -->
     <div class="mb-8">
-      <h2 class="text-2xl font-bold text-gray-900">Here are some activity options</h2>
+      <h2 class="text-2xl font-bold text-gray-900">Activities</h2>
     </div>
     
     <!-- Scrollable Content -->
@@ -18,8 +18,9 @@
       <!-- Scrollable container -->
       <div data-scroll-target="container" 
            class="flex overflow-x-auto gap-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
-        <% activities.each do |activity| %>
-          <%= render partial: "activities/activity", locals: {activity: activity} %>
+        <% 5.times do %>
+          <%#= render partial: "activities/activity", locals: {activity: activity} %>
+          <%= render partial: "shared/pulse_animation" %>
         <% end %>
       </div>
       

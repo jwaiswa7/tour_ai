@@ -2,7 +2,7 @@
   <div class="container mx-auto px-4">
     <!-- Section Header -->
     <div class="mb-8">
-      <h2 class="text-2xl font-bold text-gray-900">Here are some hotel options</h2>
+      <h2 class="text-2xl font-bold text-gray-900">Hotels</h2>
     </div>
     
     <!-- Scrollable Content -->
@@ -19,7 +19,8 @@
       <div data-scroll-target="container" 
            class="flex overflow-x-auto gap-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
         <% 5.times do %>
-          <%= render partial: "hotels/hotel", locals: {name: "Hotel #{rand(1..5)}"} %>
+          <%#= render partial: "hotels/hotel", locals: {name: "Hotel #{rand(1..5)}"} %>
+          <%= render partial: "shared/pulse_animation" %>
         <% end %>
       </div>
       
